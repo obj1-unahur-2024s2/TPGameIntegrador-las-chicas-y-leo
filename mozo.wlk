@@ -2,7 +2,7 @@ import wollok.game.*
 
 object mozo {
 
-    method image() = "totoro-pixel.jpg"
+    method image() = "mozoPrueba.png"
     var property position = game.at(0,0)
 
 	method irA(nuevaPosicion) {

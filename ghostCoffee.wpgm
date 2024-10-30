@@ -4,10 +4,13 @@ import mozo.*
 
 program ghostCoffee {
 	game.title("Ghost Coffee")
-	game.height(34)
-	game.width(50)
+	game.height(12)
+	game.width(18)
+	game.cellSize(64)
+	game.ground("celdaPrueba.png") // fondo de prueba
+	//game.boardGround("escenarioPrueba.png")
 	//game.addVisual(mozo)
-	game.boardGround("fondoRestaurante (1).jpg")
+	//game.boardGround("fondoRestaurante (1).jpg")
 	nivel1.iniciar()
 
 	game.start()
