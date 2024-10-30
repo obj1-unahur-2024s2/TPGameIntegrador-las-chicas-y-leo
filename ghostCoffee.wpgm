@@ -1,0 +1,14 @@
+import wollok.game.*
+import niveles.*
+import mozo.*
+
+program ghostCoffee {
+	game.title("Ghost Coffee")
+	game.height(34)
+	game.width(50)
+	//game.addVisual(mozo)
+	game.boardGround("fondoRestaurante (1).jpg")
+	nivel1.iniciar()
+
+	game.start()
+}
