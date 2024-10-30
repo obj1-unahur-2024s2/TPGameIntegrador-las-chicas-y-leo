@@ -1,7 +1,10 @@
 import wollok.game.*
+
+// este script contiene el modelo de los CLIENTES que deberemos atender en el videojuego.
+
 class Cliente {
   
-    var property position // chequear
+    const property position
 
     method image() = "fantasmaCliente.png"
 

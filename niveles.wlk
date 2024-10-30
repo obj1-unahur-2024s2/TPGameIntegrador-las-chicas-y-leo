@@ -1,13 +1,24 @@
-import clientes.*
-import configuracion.*
 import wollok.game.*
 import mozo.*
+import elementos.*
+import configuracion.*
+
+// este script contiene los NIVELES y distintas escenas que contendrá nuestro videojuego.
 
 object nivel1 {
 
     method iniciar() {
-        game.addVisualCharacter(mozo)
-        //config.configurarTeclas()
+
+        game.addVisual(mozo)
+        // añadimos al mozo a la escena, optamos por quitarle el "character" ya que
+        // precisamos controlar las acciones del teclado para las colisiones y otras necesidades
+        
+        todosLosElementosSolidos.forEach({elemento => game.addVisual(elemento)})
+        // se añaden TODOS los elementos sólidos a la escena
+
+        config.configurarTeclas()
+        // esta línea ejecuta la configuración de las TECLAS del nivel
+        // config se encuentra en el archivo "configuracion"
     }
 
 }

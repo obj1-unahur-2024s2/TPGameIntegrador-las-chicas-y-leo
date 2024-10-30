@@ -1,17 +1,20 @@
 import wollok.game.*
 import niveles.*
-import mozo.*
+
+// este script es el INICIAL, donde podremos ejecutar el videojuego
 
 program ghostCoffee {
+
 	game.title("Ghost Coffee")
-	game.height(12)
+
 	game.width(18)
+	game.height(12)
 	game.cellSize(64)
-	game.ground("celdaPrueba.png") // fondo de prueba
-	//game.boardGround("escenarioPrueba.png")
-	//game.addVisual(mozo)
-	//game.boardGround("fondoRestaurante (1).jpg")
-	nivel1.iniciar()
+	// resolucion total = 1152 x 768
+
+	game.boardGround("escenarioPrueba3.png") // fondo de testeo
+
+	nivel1.iniciar() // esta línea da inicio al videojuego, encuentran al objeto y el método en archivo "niveles"
 
 	game.start()
 }
