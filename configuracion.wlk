@@ -17,10 +17,10 @@ object config {
 
 	method hayBorde(posicionAMover) {
 
-		return posicionAMover == game.at(0,posicionAMover.y()) ||
-		       posicionAMover == game.at(17,posicionAMover.y()) ||
-			   posicionAMover == game.at(posicionAMover.x(),0) ||
-			   posicionAMover == game.at(posicionAMover.x(),11)
+		return posicionAMover.x() == 0 ||
+		       posicionAMover.x() == 17||
+			   posicionAMover.y() == 0 ||
+			   posicionAMover.y() == 11
 		// este método devuelve si la posición dada contiene alguno de los ejes donde se encuentra el borde de la escena
 
 	}
