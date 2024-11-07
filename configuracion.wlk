@@ -1,5 +1,6 @@
 import wollok.game.*
 import mozo.*
+import clientes.*
 import elementos.*
 
 // este script contiene la CONFIGURACIÓN de las teclas, colisiones, etc.
@@ -12,6 +13,7 @@ object config {
 		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1))} )
 		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1))} )
 		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1))} )
+		keyboard.t().onPressDo({unFantasma.desaparecer()})
 
     }
 
@@ -36,7 +38,7 @@ object config {
 
 	method configurarColisiones() {
 
-		game.whenCollideDo(unaSilla, {mozo => mozo.irA(mozo.lastPosition())})
+		//game.whenCollideDo(unaSilla, {mozo => mozo.irA(mozo.lastPosition())})
 		// configuración que se utilizó de prueba, por ahora lo dejamos
 
 	}
