@@ -12,7 +12,7 @@ program ghostCoffee {
 	game.cellSize(64)
 	// resolucion total = 1152 x 768
 
-	game.boardGround("escenarioPrueba3.png") // fondo de testeo
+	game.boardGround("restauranteFondo.png") // fondo de testeo
 
 	nivel1.iniciar() // esta línea da inicio al videojuego, encuentran al objeto y el método en archivo "niveles"
 
