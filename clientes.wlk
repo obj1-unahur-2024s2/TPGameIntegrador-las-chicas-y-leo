@@ -15,10 +15,27 @@ class Cliente {
     method desaparecer() {
 
         const animacion = ["f2.png","f3.png","f4.png","f5.png","f6.png"]
-        //animacion.forEach({imagen => game.onTick("1000", "animacion", self.image(imagen))})
-        game.onTick(1000, "animacion", {self.image(animacion.anyOne())})
-        //animacion.get(1)
-        game.schedule(5000,{game.removeTickEvent("animacion")})
+        var indice = 0
+    
+        game.onTick(500, "animacion", {
+            self.image(animacion.get(indice))
+            indice += 1
+            if (indice == animacion.size())
+                game.removeTickEvent("animacion")
+            })
+
+    }
+
+    method reproducirAnimacion(elementoAAnimar) {
+
+        var indice = 0
+
+        game.onTick(500,"animacion",{
+            elementoAAnimar.image(elementoAAnimar.animacion().get(indice))
+            indice += 1
+            if (indice == elementoAAnimar.animacion().size())
+                game.removeTickEvent("animacion")
+            })
 
     }
 
