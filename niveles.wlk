@@ -17,11 +17,16 @@ object nivel1 {
         todosLosElementosSolidos.forEach({elemento => game.addVisual(elemento)})
         // se añaden TODOS los elementos sólidos a la escena
 
-        fantasmasVisibles.forEach({fantasma => game.addVisual(fantasma)})
+        //fantasmasVisibles.forEach({fantasma => game.addVisual(fantasma)})
 
         config.configurarTeclas()
         // esta línea ejecuta la configuración de las TECLAS del nivel
         // config se encuentra en el archivo "configuracion"
+
+        config.iniciarFantasmas()
+
+        //game.schedule(300000, "finJornada")
+
     }
 
 }

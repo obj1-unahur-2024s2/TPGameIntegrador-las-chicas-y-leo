@@ -1,4 +1,6 @@
 import wollok.game.*
+import configuracion.*
+import elementos.*
 
 // este script contiene el modelo de los CLIENTES que deberemos atender en el videojuego.
 
@@ -6,12 +8,23 @@ class Cliente {
   
     const property position
 
-    var property image = "f1.png"
+    var property image = "f6.png"
 
-    method aparecer() {
-        
+    const property animacionAparecer = animacionDesaparecer.reverse()
+    const property animacionDesaparecer = ["f1.png", "f2.png","f3.png","f4.png","f5.png"]
+
+    method desaparecer() {
+        config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
+        game.schedule(3000,{game.removeVisual(self)})
     }
 
+    method aparecer() {
+        config.sumarFantasma()
+        game.addVisual(self)
+        config.reproducirAnimacion(self, animacionAparecer, "animacionAparecer")
+    }
+
+    /*
     method desaparecer() {
 
         const animacion = ["f2.png","f3.png","f4.png","f5.png","f6.png"]
@@ -26,20 +39,23 @@ class Cliente {
 
     }
 
-    method reproducirAnimacion(elementoAAnimar) {
+    method reproducirAnimacion(objetoAAnimar, listaDeAnimacion) {
 
         var indice = 0
 
         game.onTick(500,"animacion",{
-            elementoAAnimar.image(elementoAAnimar.animacion().get(indice))
+            objetoAAnimar.image(listaDeAnimacion.get(indice))
             indice += 1
-            if (indice == elementoAAnimar.animacion().size())
+            if (indice == listaDeAnimacion.size())
                 game.removeTickEvent("animacion")
             })
 
     }
+    */
 
 }
 
-const fantasmasVisibles = [unFantasma]
-const unFantasma = new Cliente(position = game.at(6,3))
+const fantasmasVisibles = [unFantasma, otroFantasma, yOtroFantasma]
+const unFantasma = new Cliente(position = posicionesSillas.anyOne())
+const otroFantasma = new Cliente(position = posicionesSillas.anyOne())
+const yOtroFantasma = new Cliente(position = posicionesSillas.anyOne())

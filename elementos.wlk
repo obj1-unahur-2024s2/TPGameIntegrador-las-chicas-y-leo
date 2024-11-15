@@ -8,6 +8,7 @@ class ElementoSolido {
     // creamos una clase elemento solido que nos permita definir objetos
     // a los cuales no se los pueda "atravesar"
 
+    method positionTwo() {return position}
     const property position
 
     method esSolido() = true // verificar si se utiliza
@@ -29,6 +30,9 @@ class Mesa inherits ElementoSolido {
     // definir
     method image() = "restauranteMesa.png"
 
+    override method positionTwo() {
+        return game.at(self.position().x()+1, self.position().y())
+    }
 }
 
 class Barra inherits ElementoSolido {
@@ -65,3 +69,8 @@ const mesa4 = new Mesa(position = game.at(4,7))
 const sillaDer5 = new SillaIzq(position = game.at(11,7))
 const sillaIzq5 = new SillaDer(position = game.at(14,7))
 const mesa5 = new Mesa(position = game.at(12,7))
+
+// lista posiciones sillas
+const posicionesSillas = [sillaDer1.position(), sillaIzq1.position(), sillaDer2.position(), sillaIzq2.position(),
+sillaDer3.position(), sillaIzq3.position(), sillaDer4.position(), sillaIzq4.position(),
+sillaDer5.position(), sillaIzq5.position()]
