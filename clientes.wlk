@@ -6,7 +6,7 @@ import elementos.*
 
 class Cliente {
   
-    const property position
+    var property position = game.origin()
 
     var property image = "f6.png"
 
@@ -15,13 +15,20 @@ class Cliente {
 
     method desaparecer() {
         config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
-        game.schedule(3000,{game.removeVisual(self)})
+        game.schedule(3000,{game.removeVisual(self) fantasmasVisibles.remove(self)})
     }
 
     method aparecer() {
-        config.sumarFantasma()
+        position = self.encontrarSillaDesocupada()
+        fantasmasVisibles.add(self)
         game.addVisual(self)
         config.reproducirAnimacion(self, animacionAparecer, "animacionAparecer")
+    }
+
+    method encontrarSillaDesocupada() {
+
+        const sillasDesocupadas = todasLasSillas.filter({s => not s.estaOcupada()})
+        return sillasDesocupadas.anyOne().position()
     }
 
     /*
@@ -55,7 +62,8 @@ class Cliente {
 
 }
 
-const fantasmasVisibles = [unFantasma, otroFantasma, yOtroFantasma]
-const unFantasma = new Cliente(position = posicionesSillas.anyOne())
-const otroFantasma = new Cliente(position = posicionesSillas.anyOne())
-const yOtroFantasma = new Cliente(position = posicionesSillas.anyOne())
+const todosLosFantasmas = [unFantasma, otroFantasma, yOtroFantasma]
+const fantasmasVisibles = []
+const unFantasma = new Cliente()
+const otroFantasma = new Cliente()
+const yOtroFantasma = new Cliente()

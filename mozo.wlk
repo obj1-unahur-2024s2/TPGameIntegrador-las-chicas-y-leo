@@ -1,5 +1,6 @@
 import wollok.game.*
 import configuracion.*
+import clientes.*
 
 // este script contiene el modelo del MOZO, nuestro personaje principal
 
@@ -11,6 +12,11 @@ object mozo {
 	method position() = position // getter
 
 	method lastPosition() = position // getter
+
+	method celdasLindantes() = [self.position().x()+1,
+							   self.position().x()-1,
+							   self.position().y()+1,
+							   self.position().y()-1]
 
 	method image() = "mozoPrueba.png" // imagen de prueba
 
@@ -25,6 +31,10 @@ object mozo {
 			}
 
 		else {position = self.position()} // si hay una colisión, el mozo se queda en la posición actual
+	}
+
+	method hayFantasmaEnCeldaLindante() {
+
 	}
 
 }

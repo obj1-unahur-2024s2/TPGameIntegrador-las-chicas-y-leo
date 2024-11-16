@@ -1,4 +1,5 @@
 import wollok.game.*
+import clientes.*
 
 // este script contiene TODOS los elementos visuales que aparecerán en nuestro videojuego
 
@@ -17,11 +18,18 @@ class ElementoSolido {
 
 class SillaIzq inherits ElementoSolido {
 
+    method estaOcupada() {
+        return fantasmasVisibles.any({f => f.position() == self.position()})
+    }
+
     method image() = "restauranteSillaIzquierda.png" // aún debemos hacer la imagen "silla"
 
 }
-
 class SillaDer inherits ElementoSolido {
+
+    method estaOcupada() {
+        return fantasmasVisibles.any({f => f.position() == self.position()})
+    }
 
     method image() = "restauranteSillaDerecha.png" // aún debemos hacer la imagen "silla"
 
@@ -71,6 +79,8 @@ const sillaIzq5 = new SillaDer(position = game.at(14,7))
 const mesa5 = new Mesa(position = game.at(12,7))
 
 // lista posiciones sillas
-const posicionesSillas = [sillaDer1.position(), sillaIzq1.position(), sillaDer2.position(), sillaIzq2.position(),
-sillaDer3.position(), sillaIzq3.position(), sillaDer4.position(), sillaIzq4.position(),
-sillaDer5.position(), sillaIzq5.position()]
+const posicionesSillas = todasLasSillas.map({s => s.position()})
+
+const todasLasSillas = [sillaDer1, sillaIzq1, sillaDer2, sillaIzq2,
+sillaDer3, sillaIzq3, sillaDer4, sillaIzq4,
+sillaDer5, sillaIzq5]

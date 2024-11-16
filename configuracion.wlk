@@ -7,12 +7,6 @@ import elementos.*
 
 object config {
 
-	var fantasmasEnEscena = 0
-
-	method sumarFantasma() {
-		fantasmasEnEscena = fantasmasEnEscena + 1
-	}
-
 	method configurarTeclas() {
 
 		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1)))} )
@@ -20,7 +14,7 @@ object config {
 		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1))} )
 		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1))} )
 		keyboard.t().onPressDo({fantasmasVisibles.forEach({fantasma => fantasma.desaparecer()})})
-		keyboard.g().onPressDo({fantasmasVisibles.forEach({fantasma => fantasma.aparecer()})})
+		keyboard.g().onPressDo({self.anadirDeAUnFantasma(self.tiempoAlAzar())})
 
     }
 
@@ -62,11 +56,20 @@ object config {
             })
 	}
 
-	method iniciarFantasmas() {
-		if (fantasmasEnEscena <= 3)
-            fantasmasVisibles.forEach({fantasma => fantasma.aparecer()})
-    }
+	method anadirDeAUnFantasma(unTiempo) {
 
-		
+		var indice = 0
+
+		game.onTick(unTiempo,"anadir fantasma",{
+			todosLosFantasmas.get(indice).aparecer()
+			indice += 1
+			if (indice == todosLosFantasmas.size())
+				game.removeTickEvent("anadir fantasma")
+		})
+	}
+
+	method tiempoAlAzar() {
+		return 3000.randomUpTo(8000)
+	}
 
 }

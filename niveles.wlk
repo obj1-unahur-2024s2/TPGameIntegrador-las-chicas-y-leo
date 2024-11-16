@@ -23,7 +23,9 @@ object nivel1 {
         // esta línea ejecuta la configuración de las TECLAS del nivel
         // config se encuentra en el archivo "configuracion"
 
-        config.iniciarFantasmas()
+        //todosLosFantasmas.forEach({f => f.aparecer()})
+
+        config.anadirDeAUnFantasma(config.tiempoAlAzar())
 
         //game.schedule(300000, "finJornada")
 
