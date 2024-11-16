@@ -3,6 +3,7 @@ import mozo.*
 import elementos.*
 import clientes.*
 import configuracion.*
+import temporizador.*
 
 // este script contiene los NIVELES y distintas escenas que contendrá nuestro videojuego.
 
