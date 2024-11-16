@@ -2,6 +2,7 @@ import wollok.game.*
 import mozo.*
 import clientes.*
 import elementos.*
+import niveles.*
 
 // este script contiene la CONFIGURACIÓN de las teclas, colisiones, etc.
 
@@ -13,8 +14,9 @@ object config {
 		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1))} )
 		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1))} )
 		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1))} )
-		keyboard.t().onPressDo({fantasmasVisibles.forEach({fantasma => fantasma.desaparecer()})})
+		keyboard.t().onPressDo({cliente.fantasmasVisibles().forEach({fantasma => fantasma.desaparecer()})})
 		keyboard.g().onPressDo({self.anadirDeAUnFantasma(self.tiempoAlAzar())})
+		keyboard.p().onPressDo({game.addVisual(pantallaDerrota)})
 
     }
 
@@ -30,7 +32,7 @@ object config {
 
 	method hayColision(posicionAMover) {
 
-		return todosLosElementosSolidos.any({elemento => elemento.position() == posicionAMover or elemento.positionTwo() == posicionAMover}) || self.hayBorde(posicionAMover)
+		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover or elemento.positionTwo() == posicionAMover}) || self.hayBorde(posicionAMover)
 		// este método devuelve si algún elemento sólido de la escena es IGUAL a la posición dada
 		// por ahora, lo utilizamos para sensar el movimiento del mozo,
 		// si la posición a la que SE MOVERÁ el mozo es LA MISMA que la de algún elemento sólido de la escena
@@ -61,9 +63,9 @@ object config {
 		var indice = 0
 
 		game.onTick(unTiempo,"anadir fantasma",{
-			todosLosFantasmas.get(indice).aparecer()
+			cliente.todosLosFantasmas().get(indice).aparecer()
 			indice += 1
-			if (indice == todosLosFantasmas.size())
+			if (indice == cliente.todosLosFantasmas().size())
 				game.removeTickEvent("anadir fantasma")
 		})
 	}
@@ -71,5 +73,57 @@ object config {
 	method tiempoAlAzar() {
 		return 3000.randomUpTo(8000)
 	}
+
+}
+
+object temporizador {
+
+	var tiempo = 180
+
+	method tiempo() = tiempo
+
+	method text() = self.transformarTiempo()
+
+	 method textColor() = paleta.blanco()
+
+	method position() = game.at(15,11)
+
+	method reiniciar() {
+		tiempo = 180
+		game.removeTickEvent("tiempo")
+	}
+
+	method pasarSegundo() {
+		tiempo -= 1
+	}
+
+	method correrTiempo() {
+		game.onTick(1000, "tiempo", {
+		self.pasarSegundo()
+		if (tiempo == 0) {
+			game.clear()
+			game.addVisual(pantallaVictoria)
+		}})
+	}
+
+	method transformarTiempo() {
+		var minutos = (tiempo / 60.0).truncate(0)
+		var segundosRestantes = tiempo % 60
+		return self.formatoTiempo(minutos) + ":" + self.formatoTiempo(segundosRestantes)
+	}
+
+	method formatoTiempo(numero) {
+        if (numero < 10) {
+            return "0" + numero.toString()
+        } else {
+            return numero.toString()
+        }
+	}
+
+}
+
+object paleta {
+
+	const property blanco = "FFFFFFFF"
 
 }

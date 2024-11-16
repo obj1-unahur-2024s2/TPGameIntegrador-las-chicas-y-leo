@@ -1,3 +1,4 @@
+import niveles.*
 import wollok.game.*
 import configuracion.*
 import clientes.*
@@ -5,6 +6,8 @@ import clientes.*
 // este script contiene el modelo del MOZO, nuestro personaje principal
 
 object mozo {
+
+	var clientesPerdidos = 0
 
     var position = game.at(1,1) // posicion inicial que irá variando con el movimiento
 	// var lastPosition = position // la posicion ANTERIOR a la actual en la que se encontraba el mozo (verificar si se usa)
@@ -17,6 +20,12 @@ object mozo {
 							   self.position().x()-1,
 							   self.position().y()+1,
 							   self.position().y()-1]
+
+	method perderCliente() {
+		clientesPerdidos += 1
+		if (clientesPerdidos == 3)
+			game.addVisual(pantallaDerrota)
+	}
 
 	method image() = "mozoPrueba.png" // imagen de prueba
 

@@ -13,21 +13,22 @@ class Cliente {
     const property animacionAparecer = animacionDesaparecer.reverse()
     const property animacionDesaparecer = ["f1.png", "f2.png","f3.png","f4.png","f5.png"]
 
+
     method desaparecer() {
         config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
-        game.schedule(3000,{game.removeVisual(self) fantasmasVisibles.remove(self)})
+        game.schedule(3000,{game.removeVisual(self) cliente.fantasmasVisibles().remove(self)})
     }
 
     method aparecer() {
         position = self.encontrarSillaDesocupada()
-        fantasmasVisibles.add(self)
+        cliente.fantasmasVisibles().add(self)
         game.addVisual(self)
         config.reproducirAnimacion(self, animacionAparecer, "animacionAparecer")
     }
 
     method encontrarSillaDesocupada() {
 
-        const sillasDesocupadas = todasLasSillas.filter({s => not s.estaOcupada()})
+        const sillasDesocupadas = elementoSolido.todasLasSillas().filter({s => not s.estaOcupada()})
         return sillasDesocupadas.anyOne().position()
     }
 
@@ -39,6 +40,8 @@ class Cliente {
     method comunicarPedido() {}
 
     method recibirPedido() {}
+
+    // method rechazarPedidoIncorrecto() {}
 
     method comer() {}
 
@@ -79,12 +82,16 @@ class Cliente {
 
 }
 
-const todosLosFantasmas = [unFantasma, otroFantasma, yOtroFantasma]
-const fantasmasVisibles = []
+object cliente {
 
-const fantasmasAtendidosCorrectamente = 0
-const fantasmasNoAtendidos = 0
+    const property todosLosFantasmas = [unFantasma, otroFantasma, yOtroFantasma]
+    const property fantasmasVisibles = []
 
-const unFantasma = new Cliente()
-const otroFantasma = new Cliente()
-const yOtroFantasma = new Cliente()
+    const fantasmasAtendidosCorrectamente = 0
+    const fantasmasNoAtendidos = 0
+
+    const unFantasma = new Cliente()
+    const otroFantasma = new Cliente()
+    const yOtroFantasma = new Cliente()
+
+}
