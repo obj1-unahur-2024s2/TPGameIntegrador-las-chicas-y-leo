@@ -14,7 +14,9 @@ program ghostCoffee {
 
 	game.boardGround("restauranteFondo.png") // fondo de testeo
 
-	nivel1.iniciar() // esta línea da inicio al videojuego, encuentran al objeto y el método en archivo "niveles"
+	menu.iniciar()
+	
+	//nivel1.iniciar() // esta línea da inicio al videojuego, encuentran al objeto y el método en archivo "niveles"
 
 	game.start()
 }

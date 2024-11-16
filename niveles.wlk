@@ -38,13 +38,77 @@ object nivel1 {
 
 object nivel2 {
 
+    method iniciar() {
+      
+    }
+
 }
 
 object menu {
 
     // empezar (nivel1 o nivel2), controles, salir del juego
 
+    method iniciar() {
+        if (!game.hasVisual(pantallaMenu)) game.addVisual(pantallaMenu)
+        //nivel 1
+        keyboard.num1().onPressDo({ 
+
+            if (game.hasVisual(pantallaMenu)){
+                self.ocultarMenu()
+                nivel1.iniciar()
+            }
+
+        })
+        //nivel 2
+        keyboard.num2().onPressDo({ 
+
+            if (game.hasVisual(pantallaMenu)){
+                self.ocultarMenu()
+                nivel2.iniciar()
+            }
+
+        })
+        //teclas
+        keyboard.c().onPressDo({ 
+
+            if (game.hasVisual(pantallaMenu)){
+                self.ocultarMenu()
+                teclas.mostrar()
+            }
+
+        })
+    }
+
+    method ocultarMenu() {
+        if (game.hasVisual(pantallaMenu))
+            game.removeVisual(pantallaMenu)
+ 	} 
 }
+
+object pantallaMenu {
+    const property image = "ejemploMenu.png"
+    const property position = game.at(0, 0) 
+}
+
+object teclas {
+    const property image = "ejemploConfig.png"
+    const property position = game.at(0, 0) 
+
+    method mostrar() {
+        game.addVisual(self)
+
+        keyboard.c().onPressDo({ 
+
+            if (game.hasVisual(self)){
+                game.removeVisual(self)
+                menu.iniciar()
+            }
+
+        })
+    }
+}
+
+
 
 object pantallaVictoria {
 
