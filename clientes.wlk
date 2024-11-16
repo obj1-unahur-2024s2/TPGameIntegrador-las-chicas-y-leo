@@ -31,6 +31,23 @@ class Cliente {
         return sillasDesocupadas.anyOne().position()
     }
 
+    method solicitarMozo() {}
+    // método que solicita al mozo para pensar el pedido
+
+    method pensarPedido() {}
+
+    method comunicarPedido() {}
+
+    method recibirPedido() {}
+
+    method comer() {}
+
+    method enojarse() {}
+
+    method desenojarse() {}
+
+
+
     /*
     method desaparecer() {
 
@@ -64,6 +81,10 @@ class Cliente {
 
 const todosLosFantasmas = [unFantasma, otroFantasma, yOtroFantasma]
 const fantasmasVisibles = []
+
+const fantasmasAtendidosCorrectamente = 0
+const fantasmasNoAtendidos = 0
+
 const unFantasma = new Cliente()
 const otroFantasma = new Cliente()
 const yOtroFantasma = new Cliente()
