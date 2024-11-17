@@ -14,7 +14,7 @@ object temporizador {
 
 	method textColor() = paleta.blanco()
 
-	method position() = game.at(15,11)
+	method position() = game.at(16,10)
 
 	method reiniciar() {
 		tiempo = 180
@@ -51,7 +51,12 @@ object temporizador {
 }
 
 object paleta {
-
 	const property blanco = "FFFFFFFF"
 
+}
+
+
+object cartelReloj {
+	method image() = "cartelReloj.png"
+	method position() = game.at(16, 10)
 }
