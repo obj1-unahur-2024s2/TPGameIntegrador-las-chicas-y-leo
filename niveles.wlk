@@ -91,7 +91,7 @@ object pantallaMenu {
 }
 
 object teclas {
-    const property image = "ejemploConfig.png"
+    const property image = "menuTeclado.png"
     const property position = game.at(0, 0) 
 
     method mostrar() {
