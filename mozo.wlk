@@ -60,26 +60,30 @@ object mozo {
 
 	}
 
-	method fantasmaConPedidoLindante(){
-		if(self.hayFantasmaEnCeldaLindante()){
-			const hola = self.celdasLindantes().find({c => self.hayFantasma(c)})
-			const hola2 = game.getObjectsIn(hola)
-			game.removeVisual(hola2.get(1))
-		}
+	method posicionDelFantasmaLindante() = self.celdasLindantes().find({c => self.hayFantasma(c)})
+
+	method elFantasmaLindante() = game.getObjectsIn(self.posicionDelFantasmaLindante()).get(1)
+
+	method quitarPedido(){
+		//if(self.hayFantasmaEnCeldaLindante()){
+			//const hola = self.celdasLindantes().find({c => self.hayFantasma(c)}) // cambiar nombre
+			//const hola2 = game.getObjectsIn(hola) // cambiar nombre
+			//game.removeVisual(hola2.get(1).miPedido())
+			game.removeVisual(self.elFantasmaLindante().miPedido())
+		//}
 	} 
 
-	method tomarPedido() {
+	/*method tomarPedido() {
 		keyboard.x().onPressDo({ 
 
-            if (self.hayFantasmaEnCeldaLindante()){
-				self.fantasmaConPedidoLindante()
+            if (self.hayFantasmaEnCeldaLindante() and game.hasVisual(self.elFantasmaLindante().miPedido())){
+				self.quitarPedido()
 				//crear pedido
-				//elimnar burbuja
 				//actualizar fantasma
             }
 
         })	  
-	}
+	}*/
 
 	method atenderClienteParaQuePiense() {}
 

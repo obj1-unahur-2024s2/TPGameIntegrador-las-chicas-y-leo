@@ -19,10 +19,9 @@ object config {
 		keyboard.p().onPressDo({game.addVisual(pantallaDerrota)})
 		keyboard.m().onPressDo({ 
 
-            if (mozo.hayFantasmaEnCeldaLindante()){
-				mozo.fantasmaConPedidoLindante()
+            if (mozo.hayFantasmaEnCeldaLindante() and game.hasVisual(mozo.elFantasmaLindante().miPedido())){
+				mozo.quitarPedido() //elimnar burbuja
 				//crear pedido
-				//elimnar burbuja
 				//actualizar fantasma
             }
 
