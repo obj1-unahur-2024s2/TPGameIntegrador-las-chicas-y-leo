@@ -12,29 +12,36 @@ object config {
 
 	method configurarTeclas() {
 
-		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1))) mozo.image("fantasmaIZQUIERDA.png")} )
-		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1)) mozo.image("fantasmaDERECHA.png")} )
-		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1)) mozo.image("fantasmaESPALDA.png")} )
-		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1)) mozo.image("fantasmaFRENTE.png")} )
+		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1))) mozo.image(mozo.mostrarImagenIzquierda())} )
+		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1)) mozo.image(mozo.mostrarImagenDerecha())} )
+		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1)) mozo.image(mozo.mostrarImagenEspalda())} )
+		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1)) mozo.image(mozo.mostrarImagenFrente())} )
 		keyboard.t().onPressDo({cliente.fantasmasVisibles().forEach({fantasma => fantasma.desaparecer()})})
 		keyboard.g().onPressDo({self.anadirDeAUnFantasma(self.tiempoAlAzar())})
 		keyboard.p().onPressDo({game.addVisual(pantallaDerrota)})
 		keyboard.x().onPressDo({ 
 
-            if (mozo.hayFantasmaParaTomarPedido()){
+            if (mozo.hayFantasmaParaTomarPedido()){ //cuando el mozo el tomo el pedido al cliente
 				mozo.quitarPedido() //elimnar burbuja
-				mozo.crearPedidoEnBarra(pedido.miPedidoDeBarra())//crear pedido
+				mozo.crearPedidoEnBarra(new PedidoDeBarra(position = game.origin()))//crear pedido
 				//actualizar cliente, el tiempo
             }
 
         })
-		keyboard.m().onPressDo({ 
+		keyboard.m().onPressDo({ //cuando el mozo el toma el pedido de la barra
 
-            if (mozo.hayFantasmaEnCeldaLindante() and game.hasVisual(mozo.elFantasmaLindante().miPedido())){
-				mozo.quitarPedido() //elimnar burbuja
-				mozo.crearPedidoEnBarra(pedido.miPedidoDeBarra())//crear pedido
-				//actualizar cliente, el tiempo
-            }
+            if (mozo.hayFantasmaEnCeldaLindante() /* and el mozo tiene el visual del mozo con cafe*/){
+				//cambiar el visual al mozo
+				mozo.tieneCafeEnMano(true)
+			}
+
+        })
+		keyboard.l().onPressDo({ //cuando el mozo ya agarro el pedido de la barra
+
+            if (mozo.hayFantasmaEnCeldaLindante() /* and el mozo tiene el visual del mozo con cafe*/){
+				//cambiar el visual al mozo
+				//poner el pedido en la mesa al lado del fantasma
+			}
 
         })
 

@@ -56,7 +56,7 @@ object barra {
     }
 
     method posicionOcupada(unaPosicion) {
-        return game.getObjectsIn(unaPosicion).size() == 2
+        return not game.getObjectsIn(unaPosicion).isEmpty()
     }
 
 }
