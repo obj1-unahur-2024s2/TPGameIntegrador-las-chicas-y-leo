@@ -9,7 +9,7 @@ object mozo {
 
 	var clientesPerdidos = 0
 
-	var property image = "fantasmaFRENTE.png"
+	var property image = "fantasmaFrenteSinCafe.png"
 
 	var property tieneCafeEnMano = false
 
@@ -67,12 +67,20 @@ object mozo {
 		return cliente.fantasmasVisibles().any({f=>f.position() == unaPosicion})
 
 	}
+	
+	method hayPedidoEnBarraEnCeldaLindante() {
+
+		return self.celdasLindantes().any({c => self.hayPedidoEnBarra(c)})
+
+	}
 
 	method hayPedidoEnBarra(unaPosicion) { //cambiar
 
-		return cliente.fantasmasVisibles().any({f=>f.position() == unaPosicion})
+		return game.getObjectsIn(unaPosicion).size() == 1
 
 	}
+
+	method hayPedidoEnBarraParaTomar() = self.hayPedidoEnBarraEnCeldaLindante() and not self.tieneCafeEnMano()
 
 	method posicionDelFantasmaLindante() = self.celdasLindantes().find({c => self.hayFantasma(c)})
 
@@ -116,8 +124,34 @@ object mozo {
 		return if (self.tieneCafeEnMano()) "fantasmaESPALDA.png" else "fantasmaEspaldaSinCafe.png"
 	}
 
-	method tomarPlatoDeBarra() {}
+	method borrarPedidoEnBarra() {
+		game.removeVisual(self.elPedidoEnBarraLindante())
+	}
 
-	method servirPlato() {}
+	method elPedidoEnBarraLindante() {
+		return game.getObjectsIn(self.posicionDelPedidoEnBarraLindante()).get(0)
+	}
+
+	method posicionDelPedidoEnBarraLindante() {
+		return self.celdasLindantes().find({c => self.hayPedidoEnBarra(c)})
+	}
+
+	method puedeDejarPedido() = self.hayFantasmaEnCeldaLindante() and self.tieneCafeEnMano()
+
+	method ponerPedidoEnMesa() {
+		const laSilla = game.getObjectsIn(self.posicionDelFantasmaLindante()).get(0)
+		if (laSilla.orientacion() == "derecha")
+			game.addVisual(new TazaMesa(position=self.posicionDelFantasmaLindante().left(1)))
+		else
+			game.addVisual(new TazaMesa(position=self.posicionDelFantasmaLindante().right(1)))
+	}
+
+}
+
+class TazaMesa {
+
+    const property image = "tazaMesa.png"
+    
+    var property position
 
 }

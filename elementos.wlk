@@ -18,6 +18,8 @@ class ElementoSolido {
 
 class SillaIzq inherits ElementoSolido {
 
+    method orientacion() = "izquierda"
+
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})
     }
@@ -26,6 +28,8 @@ class SillaIzq inherits ElementoSolido {
 
 }
 class SillaDer inherits ElementoSolido {
+
+    method orientacion() = "derecha"
 
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})

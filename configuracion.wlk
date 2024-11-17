@@ -30,15 +30,18 @@ object config {
         })
 		keyboard.m().onPressDo({ //cuando el mozo el toma el pedido de la barra
 
-            if (mozo.hayFantasmaEnCeldaLindante() /* and el mozo tiene el visual del mozo con cafe*/){
+            if (mozo.hayPedidoEnBarraParaTomar() /* and el mozo tiene el visual del mozo con cafe*/){
 				//cambiar el visual al mozo
 				mozo.tieneCafeEnMano(true)
+				mozo.borrarPedidoEnBarra()
 			}
 
         })
 		keyboard.l().onPressDo({ //cuando el mozo ya agarro el pedido de la barra
 
-            if (mozo.hayFantasmaEnCeldaLindante() /* and el mozo tiene el visual del mozo con cafe*/){
+            if (mozo.puedeDejarPedido() /* and el mozo tiene el visual del mozo con cafe*/){
+				mozo.tieneCafeEnMano(false)
+				mozo.ponerPedidoEnMesa()
 				//cambiar el visual al mozo
 				//poner el pedido en la mesa al lado del fantasma
 			}
