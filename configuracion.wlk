@@ -21,7 +21,7 @@ object config {
 
             if (mozo.hayFantasmaEnCeldaLindante() and game.hasVisual(mozo.elFantasmaLindante().miPedido())){
 				mozo.quitarPedido() //elimnar burbuja
-				//crear pedido
+				mozo.crearPedido()//crear pedido
 				//actualizar fantasma
             }
 

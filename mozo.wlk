@@ -85,6 +85,11 @@ object mozo {
         })	  
 	}*/
 
+	method crearPedido() {
+		game.addVisual(new PedidoBarra(fantasmaAsignado=self))
+	  
+	}
+
 	method atenderClienteParaQuePiense() {}
 
 	method atenderPedido() {}
