@@ -6,6 +6,8 @@ import mozo.*
 // este script contiene el modelo de los CLIENTES que deberemos atender en el videojuego.
 
 class Cliente {
+
+    var property estoyVisible
   
     var property position = game.origin()
 
@@ -29,6 +31,7 @@ class Cliente {
         cliente.fantasmasVisibles().add(self)
         game.addVisual(self)
         config.reproducirAnimacion(self, animacionAparecer, "animacionAparecer")
+        estoyVisible=true
         self.mostrarPedido()
     }
 
@@ -64,9 +67,9 @@ object cliente {
     const fantasmasAtendidosCorrectamente = 0
     const fantasmasNoAtendidos = 0
 
-    const property unFantasma = new Cliente()
-    const property otroFantasma = new Cliente()
-    const property yOtroFantasma = new Cliente()
+    const property unFantasma = new Cliente(estoyVisible=false)
+    const property otroFantasma = new Cliente(estoyVisible=false)
+    const property yOtroFantasma = new Cliente(estoyVisible=false)
 
 }
 

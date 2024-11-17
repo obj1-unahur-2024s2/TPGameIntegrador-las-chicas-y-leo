@@ -16,10 +16,10 @@ object mozo {
 
 	// method lastPosition() = position // getter
 
-	method celdasLindantes() = [self.position().x()+1,
-							   self.position().x()-1,
-							   self.position().y()+1,
-							   self.position().y()-1]
+	method celdasLindantes() = [self.position().left(1),
+							   self.position().right(1),
+							   self.position().up(1),
+							   self.position().down(1)]
 
 	method perderCliente() {
 		clientesPerdidos += 1
