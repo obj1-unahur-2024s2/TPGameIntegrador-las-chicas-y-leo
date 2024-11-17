@@ -54,6 +54,27 @@ object mozo {
 
 	}
 
+	method fantasmaConPedidoLindante(){
+		if(self.hayFantasmaEnCeldaLindante()){
+			const hola = self.celdasLindantes().find({c => self.hayFantasma(c)})
+			const hola2 = game.getObjectsIn(hola)
+			game.removeVisual(hola2.get(1))
+		}
+	} 
+
+	method tomarPedido() {
+		keyboard.x().onPressDo({ 
+
+            if (self.hayFantasmaEnCeldaLindante()){
+				self.fantasmaConPedidoLindante()
+				//crear pedido
+				//elimnar burbuja
+				//actualizar fantasma
+            }
+
+        })	  
+	}
+
 	method atenderClienteParaQuePiense() {}
 
 	method atenderPedido() {}
