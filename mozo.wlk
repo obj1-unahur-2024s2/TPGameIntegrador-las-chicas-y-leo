@@ -87,8 +87,9 @@ object mozo {
 
 	method crearPedido() {
 		game.addVisual(new PedidoBarra(fantasmaAsignado=self))
-	  
 	}
+
+	method hayFantasmaParaTomarPedido() = self.hayFantasmaEnCeldaLindante() and game.hasVisual(self.elFantasmaLindante().miPedido())
 
 	method atenderClienteParaQuePiense() {}
 

@@ -17,12 +17,21 @@ object config {
 		keyboard.t().onPressDo({cliente.fantasmasVisibles().forEach({fantasma => fantasma.desaparecer()})})
 		keyboard.g().onPressDo({self.anadirDeAUnFantasma(self.tiempoAlAzar())})
 		keyboard.p().onPressDo({game.addVisual(pantallaDerrota)})
+		keyboard.x().onPressDo({ 
+
+            if (mozo.hayFantasmaParaTomarPedido()){
+				mozo.quitarPedido() //elimnar burbuja
+				mozo.crearPedido()//crear pedido
+				//actualizar cliente, el tiempo
+            }
+
+        })
 		keyboard.m().onPressDo({ 
 
             if (mozo.hayFantasmaEnCeldaLindante() and game.hasVisual(mozo.elFantasmaLindante().miPedido())){
 				mozo.quitarPedido() //elimnar burbuja
 				mozo.crearPedido()//crear pedido
-				//actualizar fantasma
+				//actualizar cliente, el tiempo
             }
 
         })
