@@ -9,6 +9,12 @@ object mozo {
 
 	var clientesPerdidos = 0
 
+	var property image = "fantasmaFRENTE.png"
+
+	method image(unaImagen) {
+		image = unaImagen
+	}
+
     var position = game.at(1,1) // posicion inicial que irá variando con el movimiento
 	// var lastPosition = position // la posicion ANTERIOR a la actual en la que se encontraba el mozo (verificar si se usa)
 
@@ -27,7 +33,7 @@ object mozo {
 			game.addVisual(pantallaDerrota)
 	}
 
-	method image() = "mozoPrueba.png" // imagen de prueba
+	//method image() = "mozoPrueba.png" // imagen de prueba
 
 	method irA(nuevaPosicion) {
 

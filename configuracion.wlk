@@ -10,10 +10,10 @@ object config {
 
 	method configurarTeclas() {
 
-		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1)))} )
-		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1))} )
-		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1))} )
-		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1))} )
+		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1))) mozo.image("fantasmaIZQUIERDA.png")} )
+		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1)) mozo.image("fantasmaDERECHA.png")} )
+		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1)) mozo.image("fantasmaESPALDA.png")} )
+		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1)) mozo.image("fantasmaFRENTE.png")} )
 		keyboard.t().onPressDo({cliente.fantasmasVisibles().forEach({fantasma => fantasma.desaparecer()})})
 		keyboard.g().onPressDo({self.anadirDeAUnFantasma(self.tiempoAlAzar())})
 		keyboard.p().onPressDo({game.addVisual(pantallaDerrota)})

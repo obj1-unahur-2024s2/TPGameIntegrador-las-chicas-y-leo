@@ -11,10 +11,10 @@ class Cliente {
   
     var property position = game.origin()
 
-    var property image = "f6.png"
+    var property image = "fa6.png"
 
     const property animacionAparecer = animacionDesaparecer.reverse()
-    const property animacionDesaparecer = ["f1.png", "f2.png","f3.png","f4.png","f5.png"]
+    const property animacionDesaparecer = ["fa1.png", "fa2.png","fa3.png","fa4.png","fa5.png"]
 
     const property miPedido = new Pedido(fantasmaAsignado=self)
 
