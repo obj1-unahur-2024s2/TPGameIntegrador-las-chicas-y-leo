@@ -16,7 +16,7 @@ class Cliente {
     const property animacionAparecer = animacionDesaparecer.reverse()
     const property animacionDesaparecer = ["fa1.png", "fa2.png","fa3.png","fa4.png","fa5.png"]
 
-    const property miPedido = new Pedido(fantasmaAsignado=self)
+    const property miPedido = new PedidoFantasma(fantasmaAsignado=self)
 
     method desaparecer() {
         config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
@@ -73,12 +73,16 @@ object cliente {
 
 }
 
-class Pedido {
+class PedidoFantasma {
 
     const property fantasmaAsignado
 
     const property image = "pedidoCafe.png"
 
     const property position = game.at(fantasmaAsignado.position().x()+1,fantasmaAsignado.position().y()+1)
+
+}
+
+class PedidoBarra inherits PedidoFantasma(image = "pedidoCafeBarra.png", position = game.origin()){
 
 }
