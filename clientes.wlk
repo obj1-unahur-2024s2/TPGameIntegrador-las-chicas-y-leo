@@ -2,6 +2,7 @@ import wollok.game.*
 import configuracion.*
 import elementos.*
 import mozo.*
+import pedidos.*
 
 // este script contiene el modelo de los CLIENTES que deberemos atender en el videojuego.
 
@@ -70,19 +71,5 @@ object cliente {
     const property unFantasma = new Cliente(estoyVisible=false)
     const property otroFantasma = new Cliente(estoyVisible=false)
     const property yOtroFantasma = new Cliente(estoyVisible=false)
-
-}
-
-class PedidoFantasma {
-
-    const property fantasmaAsignado
-
-    const property image = "pedidoCafe.png"
-
-    const property position = game.at(fantasmaAsignado.position().x()+1,fantasmaAsignado.position().y()+1)
-
-}
-
-class PedidoBarra inherits PedidoFantasma(image = "pedidoCafeBarra.png", position = game.origin()){
 
 }

@@ -27,6 +27,12 @@ object mozo {
 							   self.position().up(1),
 							   self.position().down(1)]
 
+    method crearPedidoEnBarra(unPedidoDeBarra) {
+			unPedidoDeBarra.position(unPedidoDeBarra.encontrarLugarLibreEnBarra())
+			game.addVisual(unPedidoDeBarra)
+            //game.addVisual(new PedidoBarra(fantasmaAsignado=self))
+        }
+	
 	method perderCliente() {
 		clientesPerdidos += 1
 		if (clientesPerdidos == 3)
@@ -60,6 +66,12 @@ object mozo {
 
 	}
 
+	method hayPedidoEnBarra(unaPosicion) {
+
+		return cliente.fantasmasVisibles().any({f=>f.position() == unaPosicion})
+
+	}
+
 	method posicionDelFantasmaLindante() = self.celdasLindantes().find({c => self.hayFantasma(c)})
 
 	method elFantasmaLindante() = game.getObjectsIn(self.posicionDelFantasmaLindante()).get(1)
@@ -85,10 +97,7 @@ object mozo {
         })	  
 	}*/
 
-	method crearPedido() {
-		game.addVisual(new PedidoBarra(fantasmaAsignado=self))
-	  
-	}
+	method hayFantasmaParaTomarPedido() = self.hayFantasmaEnCeldaLindante() and game.hasVisual(self.elFantasmaLindante().miPedido())
 
 	method atenderClienteParaQuePiense() {}
 

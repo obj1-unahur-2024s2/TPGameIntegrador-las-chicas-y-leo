@@ -43,8 +43,22 @@ class Mesa inherits ElementoSolido {
     }
 }
 
-class Barra inherits ElementoSolido {
-    // definir
+object barra {
+    
+    method position() = game.at(1, 9)
+
+    method posiciones() = [game.at(1, 9), game.at(2, 9), game.at(3, 9), game.at(4, 9), game.at(5, 9), game.at(6, 9), game.at(7, 9), game.at(8, 9), game.at(9, 9)]
+
+    method image() = "barra.png"
+
+    method hayBarra(unaPosicion) {
+        return self.posiciones().any({p => p == unaPosicion})
+    }
+
+    method posicionOcupada(unaPosicion) {
+        return game.getObjectsIn(unaPosicion).size() == 2
+    }
+
 }
 
 object elementoSolido {

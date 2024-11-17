@@ -3,6 +3,8 @@ import mozo.*
 import clientes.*
 import elementos.*
 import niveles.*
+import pedidos.*
+
 
 // este script contiene la CONFIGURACIÓN de las teclas, colisiones, etc.
 
@@ -17,12 +19,21 @@ object config {
 		keyboard.t().onPressDo({cliente.fantasmasVisibles().forEach({fantasma => fantasma.desaparecer()})})
 		keyboard.g().onPressDo({self.anadirDeAUnFantasma(self.tiempoAlAzar())})
 		keyboard.p().onPressDo({game.addVisual(pantallaDerrota)})
+		keyboard.x().onPressDo({ 
+
+            if (mozo.hayFantasmaParaTomarPedido()){
+				mozo.quitarPedido() //elimnar burbuja
+				mozo.crearPedidoEnBarra(pedido.miPedidoDeBarra())//crear pedido
+				//actualizar cliente, el tiempo
+            }
+
+        })
 		keyboard.m().onPressDo({ 
 
             if (mozo.hayFantasmaEnCeldaLindante() and game.hasVisual(mozo.elFantasmaLindante().miPedido())){
 				mozo.quitarPedido() //elimnar burbuja
-				mozo.crearPedido()//crear pedido
-				//actualizar fantasma
+				mozo.crearPedidoEnBarra(pedido.miPedidoDeBarra())//crear pedido
+				//actualizar cliente, el tiempo
             }
 
         })
@@ -41,7 +52,7 @@ object config {
 
 	method hayColision(posicionAMover) {
 
-		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover or elemento.positionTwo() == posicionAMover}) || self.hayBorde(posicionAMover)
+		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover or elemento.positionTwo() == posicionAMover}) || self.hayBorde(posicionAMover) || barra.hayBarra(posicionAMover)
 		// este método devuelve si algún elemento sólido de la escena es IGUAL a la posición dada
 		// por ahora, lo utilizamos para sensar el movimiento del mozo,
 		// si la posición a la que SE MOVERÁ el mozo es LA MISMA que la de algún elemento sólido de la escena
