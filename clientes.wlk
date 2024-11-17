@@ -14,9 +14,14 @@ class Cliente {
     const property animacionAparecer = animacionDesaparecer.reverse()
     const property animacionDesaparecer = ["f1.png", "f2.png","f3.png","f4.png","f5.png"]
 
+    const property miPedido = new Pedido(fantasmaAsignado=self)
+
     method desaparecer() {
         config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
         game.schedule(3000,{game.removeVisual(self) cliente.fantasmasVisibles().remove(self)})
+        if (game.hasVisual(miPedido)) {
+            game.removeVisual(miPedido)
+        }
     }
 
     method aparecer() {
@@ -34,8 +39,6 @@ class Cliente {
     }
 
     method mostrarPedido() {
-
-        const miPedido = new Pedido(fantasmaAsignado=self)
         game.schedule(6000,{game.addVisual(miPedido)})
     }
 
@@ -71,7 +74,7 @@ class Pedido {
 
     const property fantasmaAsignado
 
-    const property image = "pedido.png"
+    const property image = "pedidoCafe.png"
 
     const property position = game.at(fantasmaAsignado.position().x()+1,fantasmaAsignado.position().y()+1)
 

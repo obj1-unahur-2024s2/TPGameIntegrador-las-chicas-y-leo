@@ -71,7 +71,7 @@ object config {
 	}
 
 	method tiempoAlAzar() {
-		return 3000.randomUpTo(8000)
+		return 3000.randomUpTo(6000)
 	}
 
 }

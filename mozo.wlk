@@ -44,6 +44,14 @@ object mozo {
 
 	method hayFantasmaEnCeldaLindante() {
 
+		return self.celdasLindantes().any({c => self.hayFantasma(c)})
+
+	}
+
+	method hayFantasma(unaPosicion) {
+
+		return cliente.fantasmasVisibles().any({f=>f.position() == unaPosicion})
+
 	}
 
 	method atenderClienteParaQuePiense() {}

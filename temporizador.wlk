@@ -12,7 +12,7 @@ object temporizador {
 
 	method text() = self.transformarTiempo()
 
-	 method textColor() = paleta.blanco()
+	method textColor() = paleta.blanco()
 
 	method position() = game.at(15,11)
 
