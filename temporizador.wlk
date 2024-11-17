@@ -14,7 +14,7 @@ object temporizador {
 
 	method textColor() = paleta.blanco()
 
-	method position() = game.at(15,11)
+	method position() = game.at(16,10)
 
 	method reiniciar() {
 		tiempo = 180
