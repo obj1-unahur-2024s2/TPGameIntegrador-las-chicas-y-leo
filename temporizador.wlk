@@ -51,7 +51,12 @@ object temporizador {
 }
 
 object paleta {
-
 	const property blanco = "FFFFFFFF"
 
+}
+
+
+object cartelReloj {
+	method image() = "cartelReloj.png"
+	method position() = game.at(16, 10)
 }

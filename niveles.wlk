@@ -30,6 +30,7 @@ object nivel1 {
 
         //game.schedule(300000, "finJornada")
         temporizador.correrTiempo()
+        game.addVisual(cartelReloj)
         game.addVisual(temporizador)
 
     }
