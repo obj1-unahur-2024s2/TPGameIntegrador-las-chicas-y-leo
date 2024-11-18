@@ -14,7 +14,7 @@ class Cliente {
 
     var property image = "f6.png"
 
-    var property pedidoEnCurso = false
+    var property tienePedidoEnCurso = false
 
     const property animacionAparecer = animacionDesaparecer.reverse()
     const property animacionDesaparecer = ["fa1.png", "fa2.png","fa3.png","fa4.png","fa5.png"]

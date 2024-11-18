@@ -160,7 +160,7 @@ object mozo {
 		return self.celdasLindantes().find({c => self.hayPedidoEnBarra(c)})
 	}
 
-	method puedeDejarPedido() = self.hayFantasmaEnCeldaLindante() and self.tieneCafeEnMano() and not game.hasVisual(self.elFantasmaLindante().miPedido())
+	method puedeDejarPedido() = self.hayFantasmaEnCeldaLindante() and self.tieneCafeEnMano() and not game.hasVisual(self.elFantasmaLindante().miPedido()) and self.elFantasmaLindante().tienePedidoEnCurso()
 
 	method ponerPedidoEnMesa() {
 		//self.elFantasmaLindante().pedidoEnCurso(false)

@@ -87,7 +87,7 @@ object menu {
 }
 
 object pantallaMenu {
-    const property image = "ejemploMenu.png"
+    const property image = "finalMenu.png"
     const property position = game.at(0, 0) 
 }
 

@@ -25,6 +25,7 @@ object config {
 				mozo.quitarPedido() //elimnar burbuja
 				//const pepe = new PedidoDeBarra(position = game.origin())
 				mozo.crearPedidoEnBarra(new PedidoDeBarra(position = game.origin()))//crear pedido
+				mozo.elFantasmaLindante().tienePedidoEnCurso(true)
 				//actualizar cliente, el tiempo
             }
 
@@ -45,6 +46,7 @@ object config {
 				mozo.tieneCafeEnMano(false)
 				mozo.ponerPedidoEnMesa()
 				mozo.actualizarImagenMozoASinCafe()
+				mozo.elFantasmaLindante().tienePedidoEnCurso(false)
 				//cambiar el visual al mozo
 				//poner el pedido en la mesa al lado del fantasma
 			}
