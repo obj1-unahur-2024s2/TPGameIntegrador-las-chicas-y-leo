@@ -20,6 +20,10 @@ object mozo {
 		image = unaImagen
 	}
 
+	method clienteAtendido() = clienteAtendido
+
+	method clientesPerdidos() = clientesPerdidos
+
 	// replace(expression, replacement)
 	method actualizarImagenMozoASinCafe() {
 			image = image.replace("ConCafe.png", "SinCafe.png")
@@ -55,7 +59,7 @@ object mozo {
 	method perderCliente() {
 		clientesPerdidos += 1
 		if (clientesPerdidos == 3)
-			game.schedule(2000, {game.addVisual(pantallaDerrota)})
+			game.schedule(2000, {game.clear() game.addVisual(pantallaDerrota)})
 	}
 
 	//method image() = "mozoPrueba.png" // imagen de prueba

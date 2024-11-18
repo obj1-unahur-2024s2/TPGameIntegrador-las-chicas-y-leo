@@ -47,7 +47,7 @@ object config {
 				mozo.tieneCafeEnMano(false)
 				mozo.ponerPedidoEnMesa()
 				mozo.actualizarImagenMozoASinCafe()
-				mozo.elFantasmaLindante().tienePedidoEnCurso(false)
+				//mozo.elFantasmaLindante().tienePedidoEnCurso(false)
 				mozo.elFantasmaLindante().recibirPedido()
 				//cambiar el visual al mozo
 				//poner el pedido en la mesa al lado del fantasma
@@ -102,7 +102,7 @@ object config {
 		game.onTick(unTiempo,"anadir fantasma",{
 			cliente.todosLosFantasmas().get(indice).aparecer()
 			indice += 1
-			if (indice == cliente.todosLosFantasmas().size())
+			if (cliente.fantasmasVisibles().size() == 3)
 				game.removeTickEvent("anadir fantasma")
 		})
 	}

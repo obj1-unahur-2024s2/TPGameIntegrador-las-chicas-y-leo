@@ -11,7 +11,11 @@ class PedidoFantasma {
 
     const property image = "pedidoCafe.png"
 
-    const property position = game.at(fantasmaAsignado.position().x()+1,fantasmaAsignado.position().y()+1)
+    var property position = game.at(self.position().x()+1,self.position().y()+1)
+
+    method reiniciarPosicion() {
+        position = game.at(fantasmaAsignado.position().x()+1, fantasmaAsignado.position().y()+1)
+    }
 
 }
 

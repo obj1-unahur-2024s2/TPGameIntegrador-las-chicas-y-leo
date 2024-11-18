@@ -6,7 +6,7 @@ import configuracion.*
 import niveles.*
 object temporizador {
 
-	var tiempo = 180
+	var tiempo = 150
 
 	method tiempo() = tiempo
 
@@ -17,7 +17,7 @@ object temporizador {
 	method position() = game.at(16,10)
 
 	method reiniciar() {
-		tiempo = 180
+		tiempo = 150
 		game.removeTickEvent("tiempo")
 	}
 

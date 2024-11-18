@@ -4,6 +4,7 @@ import elementos.*
 import clientes.*
 import configuracion.*
 import temporizador.*
+import visualstats.*
 
 // este script contiene los NIVELES y distintas escenas que contendrá nuestro videojuego.
 
@@ -30,9 +31,12 @@ object nivel1 {
 
         //game.schedule(300000, "finJornada")
         temporizador.correrTiempo()
+        game.addVisual(stats)
         game.addVisual(cartelReloj)
         game.addVisual(temporizador)
-
+        game.addVisual(textoClientesAtendidos)
+        game.addVisual(textoClientesPerdidos)
+        game.addVisual(textoFantasmasVisibles)
     }
 
 }
