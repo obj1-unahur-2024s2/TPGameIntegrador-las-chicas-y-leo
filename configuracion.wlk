@@ -102,7 +102,7 @@ object config {
 		game.onTick(unTiempo,"anadir fantasma",{
 			cliente.todosLosFantasmas().get(indice).aparecer()
 			indice += 1
-			if (cliente.fantasmasVisibles().size())
+			if (indice == cliente.todosLosFantasmas().size())
 				game.removeTickEvent("anadir fantasma")
 		})
 	}

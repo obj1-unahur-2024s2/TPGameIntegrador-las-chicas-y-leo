@@ -20,17 +20,6 @@ object mozo {
 		image = unaImagen
 	}
 
-	/*method actualizarImagenMozo() {
-		if (image.contains("DerechaConCafe"))
-			image = "fantasmaDerechaSinCafe.png"
-		if (image.contains("IzquierdaConCafe"))
-			image = "fantasmaIzquierdaSinCafe.png"
-		if (image.contains("EspaldaConCafe"))
-			image = "fantasmaEspaldaSinCafe.png"
-		if (image.contains("FrenteConCafe"))
-			image = "fantasmaFrenteSinCafe.png"	
-	}*/
-
 	// replace(expression, replacement)
 	method actualizarImagenMozoASinCafe() {
 			image = image.replace("ConCafe.png", "SinCafe.png")
@@ -102,7 +91,7 @@ object mozo {
 
 	}
 
-	method hayPedidoEnBarra(unaPosicion) { //cambiar
+	method hayPedidoEnBarra(unaPosicion) {
 
 		//return game.getObjectsIn(unaPosicion).size() == 1
 		return barra.posiciones().any({p => p == unaPosicion and game.getObjectsIn(unaPosicion).size() == 1})
@@ -118,26 +107,11 @@ object mozo {
 	method hayFantasmaParaTomarPedido() = self.hayFantasmaEnCeldaLindante() and game.hasVisual(self.elFantasmaLindante().miPedido())
 
 	method quitarPedido(){
-		//if(self.hayFantasmaEnCeldaLindante()){
-			//const hola = self.celdasLindantes().find({c => self.hayFantasma(c)}) // cambiar nombre
-			//const hola2 = game.getObjectsIn(hola) // cambiar nombre
-			//game.removeVisual(hola2.get(1).miPedido())
-			//self.elFantasmaLindante().pedidoEnCurso(true)
+
 			game.removeVisual(self.elFantasmaLindante().miPedido())
-		//}
+
 	} 
 
-	/*method tomarPedido() {
-		keyboard.x().onPressDo({ 
-
-            if (self.hayFantasmaEnCeldaLindante() and game.hasVisual(self.elFantasmaLindante().miPedido())){
-				self.quitarPedido()
-				//crear pedido
-				//actualizar fantasma
-            }
-
-        })	  
-	}*/
 	method mostrarImagenIzquierda() {
 		return if (self.tieneCafeEnMano()) "fantasmaIzquierdaConCafe.png" else "fantasmaIzquierdaSinCafe.png"
 	}

@@ -8,7 +8,7 @@ import pedidos.*
 
 class Cliente {
 
-    var property estoyVisible
+    //var property estoyVisible
   
     var property position = game.origin()
 
@@ -61,19 +61,20 @@ class Cliente {
 
     method desaparecer() {
         config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
-        game.schedule(3000,{game.removeVisual(self)})
+        self.borrarPedidoEnMesa()
+        game.schedule(3000,{game.removeVisual(self) cliente.fantasmasVisibles().remove(self)})
         mozo.sumarClienteAtendido()
-        mozo.borrarPedidoEnMesa()
-        cliente.fantasmasVisibles().remove(self) // volver a poner en schedule?
+        //cliente.fantasmasVisibles().remove(self) // volver a poner en schedule?
         //estoyVisible=false
         //game.schedule(5000, {cliente.todosLosFantasmas().find({f => not cliente.fantasmasVisibles().contains(f)})})
-        config.anadirDeAUnFantasma(config.tiempoAlAzar())
+        //config.anadirDeAUnFantasma(config.tiempoAlAzar())
     }
 
     method desaparecerEnojado() {
         config.reproducirAnimacion(self, animacionDesaparecerEnojado, "animacionDesaparecerEnojado")
         game.schedule(3000,{game.removeVisual(self) cliente.fantasmasVisibles().remove(self)})
         mozo.perderCliente()
+        //cliente.fantasmasVisibles().remove(self)
         //estoyVisible=false
         if (game.hasVisual(miPedido)) {
             game.removeVisual(miPedido)
@@ -85,7 +86,7 @@ class Cliente {
         cliente.fantasmasVisibles().add(self)
         game.addVisual(self)
         config.reproducirAnimacion(self, animacionAparecer, "animacionAparecer")
-        estoyVisible=true // ver si se usa
+        //estoyVisible=true // ver si se usa
         self.mostrarPedido()
         self.correrTiempo()
     }
@@ -108,44 +109,41 @@ class Cliente {
 
     method desenojarse() {}
 
+    method borrarPedido() {
+        
+    }
+    
+	method hayCafeEnMesa(unaPosicion) {
+		return game.getObjectsIn(unaPosicion).size() == 2
+	}
+
+	method hayCafeEnLaLindanteAlFantasma() {
+		return self.celdasALosLados().any({c => self.hayCafeEnMesa(c)})
+	}
+
+	method cafeEnLaLindante() {
+		return game.getObjectsIn(self.posicionDelCafeLindante()).get(1)
+	}
+
+	method posicionDelCafeLindante() {
+		return self.celdasALosLados().find({c => self.hayCafeEnMesa(c)})
+	}
+
+	method borrarPedidoEnMesa() {
+		game.removeVisual(self.cafeEnLaLindante())
+	}
+
 }
 
 object cliente {
 
-    const property todosLosFantasmas = [unFantasma, otroFantasma, yOtroFantasma, esteFantasma, cheFantasma]
+    const property todosLosFantasmas = [unFantasma, otroFantasma] //, otroFantasma, yOtroFantasma, esteFantasma, cheFantasma]
     const property fantasmasVisibles = []
 
-    const property unFantasma = new Cliente(estoyVisible=false)
-    const property otroFantasma = new Cliente(estoyVisible=false)
-    const property yOtroFantasma = new Cliente(estoyVisible=false)
-    const property esteFantasma = new Cliente(estoyVisible=false)
-    const property cheFantasma = new Cliente(estoyVisible=false)
+    const property unFantasma = new Cliente()
+    const property otroFantasma = new Cliente()
+    const property yOtroFantasma = new Cliente()
+    const property esteFantasma = new Cliente()
+    const property cheFantasma = new Cliente()
 
 }
-/*
-object relojCliente {
-
-	var tiempo = 30
-
-	method tiempo() = tiempo
-
-	method reiniciar() {
-		tiempo = 30
-		game.removeTickEvent("tiempoCliente")
-	}
-
-	method pasarSegundo() {
-		tiempo -= 1
-	}
-
-	method correrTiempo(unFantasma) {
-		game.onTick(1000, "tiempoCliente", {
-		self.pasarSegundo()
-		if (tiempo == 15)
-			unFantasma.enojarse()
-		if (tiempo == 0)
-            unFantasma.desaparecerEnojado()
-		})
-	}
-}
-*/
