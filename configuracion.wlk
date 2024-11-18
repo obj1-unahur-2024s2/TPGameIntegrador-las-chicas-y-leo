@@ -26,6 +26,7 @@ object config {
 				//const pepe = new PedidoDeBarra(position = game.origin())
 				mozo.crearPedidoEnBarra(new PedidoDeBarra(position = game.origin()))//crear pedido
 				mozo.elFantasmaLindante().tienePedidoEnCurso(true)
+				mozo.elFantasmaLindante().reiniciar()
 				//actualizar cliente, el tiempo
             }
 
@@ -47,6 +48,7 @@ object config {
 				mozo.ponerPedidoEnMesa()
 				mozo.actualizarImagenMozoASinCafe()
 				mozo.elFantasmaLindante().tienePedidoEnCurso(false)
+				mozo.elFantasmaLindante().recibirPedido()
 				//cambiar el visual al mozo
 				//poner el pedido en la mesa al lado del fantasma
 			}
@@ -67,7 +69,7 @@ object config {
 
 	method hayColision(posicionAMover) {
 
-		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover or elemento.positionTwo() == posicionAMover}) || self.hayBorde(posicionAMover) || barra.hayBarra(posicionAMover)
+		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover}) || self.hayBorde(posicionAMover) || barra.hayBarra(posicionAMover)
 		// este método devuelve si algún elemento sólido de la escena es IGUAL a la posición dada
 		// por ahora, lo utilizamos para sensar el movimiento del mozo,
 		// si la posición a la que SE MOVERÁ el mozo es LA MISMA que la de algún elemento sólido de la escena
@@ -100,7 +102,7 @@ object config {
 		game.onTick(unTiempo,"anadir fantasma",{
 			cliente.todosLosFantasmas().get(indice).aparecer()
 			indice += 1
-			if (indice == cliente.todosLosFantasmas().size())
+			if (cliente.fantasmasVisibles().size())
 				game.removeTickEvent("anadir fantasma")
 		})
 	}

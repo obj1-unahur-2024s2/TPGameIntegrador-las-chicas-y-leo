@@ -10,6 +10,8 @@ object mozo {
 
 	var clientesPerdidos = 0
 
+	var clienteAtendido = 0
+
 	var property image = "fantasmaFrenteSinCafe.png"
 
 	var property tieneCafeEnMano = false
@@ -56,11 +58,15 @@ object mozo {
 			game.addVisual(unPedidoDeBarra)
             //game.addVisual(new PedidoBarra(fantasmaAsignado=self))
         }
+
+	method sumarClienteAtendido() {
+		clienteAtendido += 1
+	}
 	
 	method perderCliente() {
 		clientesPerdidos += 1
 		if (clientesPerdidos == 3)
-			game.addVisual(pantallaDerrota)
+			game.schedule(2000, {game.addVisual(pantallaDerrota)})
 	}
 
 	//method image() = "mozoPrueba.png" // imagen de prueba
@@ -169,6 +175,26 @@ object mozo {
 			game.addVisual(new TazaMesa(position=self.posicionDelFantasmaLindante().left(1)))
 		else
 			game.addVisual(new TazaMesa(position=self.posicionDelFantasmaLindante().right(1)))
+	}
+
+	method hayCafeEnMesa(unaPosicion) {
+		return game.getObjectsIn(unaPosicion).size() == 2
+	}
+
+	method hayCafeEnLaLindanteAlFantasma() {
+		return self.elFantasmaLindante().celdasALosLados().any({c => self.hayCafeEnMesa(c)})
+	}
+
+	method cafeEnLaLindanteAlFantasma() {
+		return game.getObjectsIn(self.posicionDelCafeEnFantasmaLindante()).get(1)
+	}
+
+	method posicionDelCafeEnFantasmaLindante() {
+		return self.elFantasmaLindante().celdasALosLados().find({c => self.hayCafeEnMesa(c)})
+	}
+
+	method borrarPedidoEnMesa() {
+		game.removeVisual(self.cafeEnLaLindanteAlFantasma())
 	}
 
 }

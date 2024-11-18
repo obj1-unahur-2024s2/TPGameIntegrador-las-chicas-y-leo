@@ -9,7 +9,6 @@ class ElementoSolido {
     // creamos una clase elemento solido que nos permita definir objetos
     // a los cuales no se los pueda "atravesar"
 
-    method positionTwo() {return position}
     const property position
 
     method esSolido() = true // verificar si se utiliza
@@ -38,13 +37,16 @@ class SillaDer inherits ElementoSolido {
     method image() = "restauranteSillaDerecha.png" // aún debemos hacer la imagen "silla"
 
 }
-class Mesa inherits ElementoSolido {
+class MesaIzq inherits ElementoSolido {
     // definir
-    method image() = "restauranteMesa.png"
+    method image() = "restauranteMesaIzq.png"
 
-    override method positionTwo() {
-        return game.at(self.position().x()+1, self.position().y())
-    }
+}
+
+class MesaDer inherits ElementoSolido {
+    // definir
+    method image() = "restauranteMesaDer.png"
+
 }
 
 object barra {
@@ -63,16 +65,14 @@ object barra {
         return not game.getObjectsIn(unaPosicion).isEmpty()
     }
 
-    method positionTwo() {return self.position()}
-
 }
 
 object elementoSolido {
 
     // CREACIÓN DE LOS OBJETOS A UTILIZAR
 
-    const property todosLosElementosSolidos = [sillaDer1, sillaIzq1, mesa1, sillaDer2, sillaIzq2, mesa2, sillaDer3, sillaIzq3, mesa3,
-                                    sillaDer4, sillaIzq4, mesa4, sillaDer5, sillaIzq5, mesa5, barra]
+    const property todosLosElementosSolidos = [sillaDer1, sillaIzq1, mesaIzq1, mesaDer1, sillaDer2, sillaIzq2, mesaIzq2, mesaDer2, sillaDer3, sillaIzq3, mesaIzq3,mesaDer3,
+                                    sillaDer4, sillaIzq4, mesaDer4, mesaIzq4, sillaDer5, sillaIzq5, mesaIzq5, mesaDer5, barra]
     // esta lista contendrá TODOS los objetos que añadiremos VISUALMENTE a la escena
 
     // lista posiciones sillas
@@ -85,26 +85,31 @@ object elementoSolido {
     // MESA 1
     const sillaDer1 = new SillaIzq(position = game.at(3,3))
     const sillaIzq1 = new SillaDer(position = game.at(6,3))
-    const mesa1 = new Mesa(position = game.at(4,3))
+    const mesaIzq1 = new MesaIzq(position = game.at(4,3))
+    const mesaDer1 = new MesaDer(position = game.at(5,3))
 
     // MESA 2
     const sillaDer2 = new SillaIzq(position = game.at(11,3))
     const sillaIzq2 = new SillaDer(position = game.at(14,3))
-    const mesa2 = new Mesa(position = game.at(12,3))
+    const mesaIzq2 = new MesaIzq(position = game.at(12,3))
+    const mesaDer2 = new MesaDer(position = game.at(13,3))
 
     // MESA 3
     const sillaDer3 = new SillaIzq(position = game.at(7,5))
     const sillaIzq3 = new SillaDer(position = game.at(10,5))
-    const mesa3 = new Mesa(position = game.at(8,5))
+    const mesaIzq3 = new MesaIzq(position = game.at(8,5))
+    const mesaDer3 = new MesaDer(position = game.at(9,5))
 
     // MESA 4
     const sillaDer4 = new SillaIzq(position = game.at(3,7))
     const sillaIzq4 = new SillaDer(position = game.at(6,7))
-    const mesa4 = new Mesa(position = game.at(4,7))
+    const mesaIzq4 = new MesaIzq(position = game.at(4,7))
+    const mesaDer4 = new MesaDer(position = game.at(5,7))
 
     // MESA 5
     const sillaDer5 = new SillaIzq(position = game.at(11,7))
     const sillaIzq5 = new SillaDer(position = game.at(14,7))
-    const mesa5 = new Mesa(position = game.at(12,7))
+    const mesaIzq5 = new MesaIzq(position = game.at(12,7))
+    const mesaDer5 = new MesaDer(position = game.at(13,7))
 
 }
