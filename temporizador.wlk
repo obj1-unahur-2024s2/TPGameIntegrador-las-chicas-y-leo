@@ -35,8 +35,8 @@ object temporizador {
 	}
 
 	method transformarTiempo() {
-		var minutos = (tiempo / 60.0).truncate(0)
-		var segundosRestantes = tiempo % 60
+		const minutos = (tiempo / 60.0).truncate(0)
+		const segundosRestantes = tiempo % 60
 		return self.formatoTiempo(minutos) + ":" + self.formatoTiempo(segundosRestantes)
 	}
 

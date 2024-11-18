@@ -114,7 +114,21 @@ object teclas {
 }
 
 
+object victoria {
 
+    method iniciar() {
+        if (!game.hasVisual(pantallaVictoria)) game.addVisual(pantallaVictoria)
+    }
+
+}
+
+object derrota {
+
+    method iniciar() {
+        if (!game.hasVisual(pantallaDerrota)) game.addVisual(pantallaDerrota)
+    }
+
+}
 object pantallaVictoria {
 
     // volver al menu, salir del juego
