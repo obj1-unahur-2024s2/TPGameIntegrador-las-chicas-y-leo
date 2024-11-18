@@ -32,7 +32,6 @@ object nivel1 {
         temporizador.correrTiempo()
         game.addVisual(cartelReloj)
         game.addVisual(temporizador)
-        game.addVisual(barra)
 
     }
 

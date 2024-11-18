@@ -51,9 +51,9 @@ object barra {
     
     method position() = game.at(1, 9)
 
-    method posiciones() = [game.at(1, 9), game.at(2, 9), game.at(3, 9), game.at(4, 9), game.at(5, 9), game.at(6, 9), game.at(7, 9), game.at(8, 9), game.at(9, 9)]
+    method posiciones() = [game.at(2, 9), game.at(3, 9), game.at(4, 9), game.at(5, 9), game.at(6, 9), game.at(7, 9), game.at(8, 9), game.at(9, 9)]
 
-    method image() = "barra.png"
+    method image() = "unaBarra.png"
 
     method hayBarra(unaPosicion) {
         return self.posiciones().any({p => p == unaPosicion})
@@ -63,6 +63,8 @@ object barra {
         return not game.getObjectsIn(unaPosicion).isEmpty()
     }
 
+    method positionTwo() {return self.position()}
+
 }
 
 object elementoSolido {
@@ -70,7 +72,7 @@ object elementoSolido {
     // CREACIÓN DE LOS OBJETOS A UTILIZAR
 
     const property todosLosElementosSolidos = [sillaDer1, sillaIzq1, mesa1, sillaDer2, sillaIzq2, mesa2, sillaDer3, sillaIzq3, mesa3,
-                                    sillaDer4, sillaIzq4, mesa4, sillaDer5, sillaIzq5, mesa5]
+                                    sillaDer4, sillaIzq4, mesa4, sillaDer5, sillaIzq5, mesa5, barra]
     // esta lista contendrá TODOS los objetos que añadiremos VISUALMENTE a la escena
 
     // lista posiciones sillas

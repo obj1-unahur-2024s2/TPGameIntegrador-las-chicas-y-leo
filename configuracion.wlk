@@ -23,6 +23,7 @@ object config {
 
             if (mozo.hayFantasmaParaTomarPedido()){ //cuando el mozo el tomo el pedido al cliente
 				mozo.quitarPedido() //elimnar burbuja
+				//const pepe = new PedidoDeBarra(position = game.origin())
 				mozo.crearPedidoEnBarra(new PedidoDeBarra(position = game.origin()))//crear pedido
 				//actualizar cliente, el tiempo
             }
@@ -34,6 +35,7 @@ object config {
 				//cambiar el visual al mozo
 				mozo.tieneCafeEnMano(true)
 				mozo.borrarPedidoEnBarra()
+				mozo.actualizarImagenMozoAConCafe()
 			}
 
         })
@@ -42,6 +44,7 @@ object config {
             if (mozo.puedeDejarPedido() /* and el mozo tiene el visual del mozo con cafe*/){
 				mozo.tieneCafeEnMano(false)
 				mozo.ponerPedidoEnMesa()
+				mozo.actualizarImagenMozoASinCafe()
 				//cambiar el visual al mozo
 				//poner el pedido en la mesa al lado del fantasma
 			}

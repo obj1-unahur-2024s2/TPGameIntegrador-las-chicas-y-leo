@@ -17,12 +17,16 @@ class PedidoFantasma {
 
 class PedidoDeBarra {
 
-    const property image = "pedidoCafeBarra.png"
+    const property image = "tazaDeBarra.png"
     
     var property position
 
     method encontrarLugarLibreEnBarra() {
         return barra.posiciones().find({p => not barra.posicionOcupada(p)})
     }
+
+    //var estoyEnLaBarra = false
+
+    //method estoyEnLaBarra() = estoyEnLaBarra
 
 }
