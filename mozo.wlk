@@ -62,7 +62,7 @@ object mozo {
 	method perderCliente() {
 		clientesPerdidos += 1
 		if (clientesPerdidos >= self.condicionPerdida()){
-			game.schedule(3000, {game.clear() reinicio.reiniciarTodoNivelUno() derrota.iniciar()})
+			game.schedule(3000, {game.clear() reinicio.reiniciarTodoElNivel() derrota.iniciar()})
 		}
 	}
 	

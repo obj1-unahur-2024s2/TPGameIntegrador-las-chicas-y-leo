@@ -35,7 +35,7 @@ object temporizador {
 		self.pasarSegundo()
 		if (tiempo == 0) {
 			game.clear()
-			reinicio.reiniciarTodoNivelUno()
+			reinicio.reiniciarTodoElNivel()
 			victoria.iniciar()
 			//game.addVisual(pantallaVictoria)
 		}})

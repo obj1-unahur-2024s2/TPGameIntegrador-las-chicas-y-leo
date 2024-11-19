@@ -207,7 +207,7 @@ object derrota {
 object pantallaDerrota {
 
     // reiniciar, volver al menu, salir del juego
-    method image() = "derrota.png"
+    method image() = "perdiste.png"
     method position() = game.at(0, 0)
 
 }

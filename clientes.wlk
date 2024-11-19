@@ -147,7 +147,7 @@ class Cliente {
 // CLIENTE LISTAS E INSTANCIAS
 object cliente {
 
-    const property todosLosFantasmas = [fantasma1, fantasma2, fantasma3, fantasma4, fantasma5, fantasma6] //, otroFantasma, yOtroFantasma, esteFantasma, cheFantasma]
+    const property todosLosFantasmas = [fantasma1, fantasma2, fantasma3, fantasma4, fantasma5, fantasma6]
     const property fantasmasVisibles = []
 
     const property fantasma1 = new Cliente(nroFantasma="1")

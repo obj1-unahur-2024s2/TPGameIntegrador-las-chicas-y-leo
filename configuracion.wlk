@@ -131,7 +131,7 @@ object config {
 
 object reinicio {
 
-	method reiniciarTodoNivelUno() {
+	method reiniciarTodoElNivel() {
 		temporizador.reiniciar()
 		mozo.reiniciarMozo()
 		cliente.fantasmasVisibles().forEach({f => f.reiniciarYParar("relojCliente"+f.nroFantasma())})
