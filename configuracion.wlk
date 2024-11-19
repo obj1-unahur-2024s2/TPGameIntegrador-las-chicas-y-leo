@@ -12,78 +12,87 @@ object config {
 
 	method configurarTeclas() {
 
+		// TECLAS DE MOVIMIENTO
+		// Actualiza la posición del mozo si puede moverse + su imagen orientada en dicha dirección
+
 		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1))) mozo.image(mozo.mostrarImagenIzquierda())} )
 		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1)) mozo.image(mozo.mostrarImagenDerecha())} )
 		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1)) mozo.image(mozo.mostrarImagenEspalda())} )
 		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1)) mozo.image(mozo.mostrarImagenFrente())} )
-		keyboard.t().onPressDo({cliente.fantasmasVisibles().forEach({fantasma => fantasma.desaparecer()})})
-		keyboard.g().onPressDo({self.anadirDeAUnFantasma(self.tiempoAlAzar())})
-		keyboard.p().onPressDo({game.addVisual(pantallaDerrota)})
-		keyboard.x().onPressDo({ 
 
-            if (mozo.hayFantasmaParaTomarPedido()){ //cuando el mozo el tomo el pedido al cliente
-				mozo.quitarPedido() //elimnar burbuja
-				//const pepe = new PedidoDeBarra(position = game.origin())
-				mozo.crearPedidoEnBarra(new PedidoDeBarra(position = game.origin()))//crear pedido
-				mozo.elFantasmaLindante().tienePedidoEnCurso(true)
-				mozo.elFantasmaLindante().reiniciar()
-				//actualizar cliente, el tiempo
-            }
+		// TECLAS DE INTERACCIÓN
 
-        })
-		keyboard.m().onPressDo({ //cuando el mozo el toma el pedido de la barra
+		keyboard.x().onPressDo({self.interaccionTomarPedidoAFantasma()}) // Toma el pedido del cliente en la celda lindante
 
-            if (mozo.hayPedidoEnBarraParaTomar() /* and el mozo tiene el visual del mozo con cafe*/){
-				//cambiar el visual al mozo
-				mozo.tieneCafeEnMano(true)
-				mozo.borrarPedidoEnBarra()
-				mozo.actualizarImagenMozoAConCafe()
-			}
+		keyboard.m().onPressDo({self.interaccionTomarPedidoDeBarra()}) // Toma el pedido de la barra en la celda lindante
 
-        })
-		keyboard.l().onPressDo({ //cuando el mozo ya agarro el pedido de la barra
-
-            if (mozo.puedeDejarPedido() /* and el mozo tiene el visual del mozo con cafe*/){
-				mozo.tieneCafeEnMano(false)
-				mozo.ponerPedidoEnMesa()
-				mozo.actualizarImagenMozoASinCafe()
-				//mozo.elFantasmaLindante().tienePedidoEnCurso(false)
-				mozo.elFantasmaLindante().recibirPedido()
-				//cambiar el visual al mozo
-				//poner el pedido en la mesa al lado del fantasma
-			}
-
-        })
+		keyboard.l().onPressDo({self.interaccionServirPedidoAFantasma()}) // Sirve el pedido en mano al cliente en la celda lindante
 
     }
 
+	// MÉTODOS DE INTERACCIÓN
+
+	method interaccionTomarPedidoAFantasma() {
+
+		if (mozo.hayFantasmaParaTomarPedido()){ // Se asegura que haya un fantasma en la lindante para tomar un pedido
+			mozo.quitarPedido() // Elimina la burbuja del pedido
+			mozo.crearPedidoEnBarra(new PedidoDeBarra(position = game.origin())) // Crea el pedido en la barra
+			mozo.elFantasmaLindante().tienePedidoEnCurso(true) // Setea el curso del pedido del fantasma
+			mozo.elFantasmaLindante().reiniciar() // reinicia el "reloj" del cliente para que no se continue enojando luego de ser atendido
+        }
+
+	}
+
+	method interaccionTomarPedidoDeBarra() {
+
+	    if (mozo.hayPedidoEnBarraParaTomar()){ // Se asegura que haya un pedido en la barra para tomar
+			mozo.tieneCafeEnMano(true) // Setea el mozo a tiene café en mano
+			mozo.borrarPedidoEnBarra() // Borra el pedido de la barra
+			mozo.actualizarImagenMozoAConCafe() // Actualiza la imagen del mozo CON UN CAFÉ en la celda actual, para dar un efecto visual en tiempo real
+		}
+
+	}
+
+	method interaccionServirPedidoAFantasma() {
+        
+		if (mozo.puedeDejarPedido()){ // Se asegura que puede dejare un pedido en la celda lindante
+			mozo.tieneCafeEnMano(false) // Setea el mozo a NO tiene café en mano
+			mozo.ponerPedidoEnMesa() // Pone el pedido en la mesa del fantasma de la celda lindante
+			mozo.actualizarImagenMozoASinCafe() // Actualiza la imagen del mozo SIN CAFÉ en la celda actual, para dar un efecto visual en tiempo real
+			mozo.elFantasmaLindante().recibirPedido() // El fantasma de la celda lindante recibe el pedido
+		}
+	}
+
+	// COLISIONES
+
 	method hayBorde(posicionAMover) {
+
+		// DETECTAR SI HAY BORDE
+		// Este método devuelve si la posición dada contiene alguno de los ejes donde se encuentra el borde de la escena
 
 		return posicionAMover.x() == 0 ||
 		       posicionAMover.x() == 17||
 			   posicionAMover.y() == 0 ||
 			   posicionAMover.y() == 11
-		// este método devuelve si la posición dada contiene alguno de los ejes donde se encuentra el borde de la escena
 
 	}
 
 	method hayColision(posicionAMover) {
 
+		// DETECTAR SI HAY COLISIÓN
+
 		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover}) || self.hayBorde(posicionAMover) || barra.hayBarra(posicionAMover)
-		// este método devuelve si algún elemento sólido de la escena es IGUAL a la posición dada
-		// por ahora, lo utilizamos para sensar el movimiento del mozo,
+		// Este método devuelve si algún elemento sólido de la escena es IGUAL a la posición dada
+		// Lo utilizamos para sensar el movimiento del mozo
 		// si la posición a la que SE MOVERÁ el mozo es LA MISMA que la de algún elemento sólido de la escena
 		// si es verdadero, entonces habrá colisión
 	}
 
-	method configurarColisiones() {
-
-		//game.whenCollideDo(unaSilla, {mozo => mozo.irA(mozo.lastPosition())})
-		// configuración que se utilizó de prueba, por ahora lo dejamos
-
-	}
+	// ANIMACIONES
 
 	method reproducirAnimacion(objetoAAnimar, listaDeAnimacion, nombreTick) {
+
+		// Este método reproduce una serie de imágenes de una lista
 
         var indice = 0
 
@@ -95,7 +104,9 @@ object config {
             })
 	}
 
-	method anadirDeAUnFantasma(unTiempo) {
+	// INICIALIZACIÓN
+
+	method iniciarFantasmas(unTiempo) {
 
 		var indice = 0
 

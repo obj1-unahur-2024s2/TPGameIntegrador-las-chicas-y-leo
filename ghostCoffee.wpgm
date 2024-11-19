@@ -16,7 +16,7 @@ program ghostCoffee {
 
 	menu.iniciar()
 	
-	//nivel1.iniciar() // esta línea da inicio al videojuego, encuentran al objeto y el método en archivo "niveles"
+	//menu.iniciar() // esta línea da inicio al videojuego, encuentran al objeto y el método en archivo "niveles"
 
 	game.start()
 }

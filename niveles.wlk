@@ -4,116 +4,127 @@ import elementos.*
 import clientes.*
 import configuracion.*
 import temporizador.*
-import visualstats.*
+import textoystatsvisuales.*
 
 // este script contiene los NIVELES y distintas escenas que contendrá nuestro videojuego.
 
+// NIVEL 1
 object nivel1 {
 
+    // INICIALIZAR NIVEL 1
     method iniciar() {
 
+        config.configurarTeclas() // Ejecuta la configuración de las TECLAS del niveL
+
         game.addVisual(mozo)
-        // añadimos al mozo a la escena, optamos por quitarle el "character" ya que
-        // precisamos controlar las acciones del teclado para las colisiones y otras necesidades
+        // Añadimos al mozo a la escena, optamos por quitarle el "character" ya que
+        // Precisamos controlar las acciones del teclado para las colisiones y otras necesidades
         
-        elementoSolido.todosLosElementosSolidos().forEach({elemento => game.addVisual(elemento)})
-        // se añaden TODOS los elementos sólidos a la escena
+        elementoSolido.todosLosElementosSolidos().forEach({elemento => game.addVisual(elemento)}) // Se añaden TODOS los elementos sólidos a la escena
 
-        //fantasmasVisibles.forEach({fantasma => game.addVisual(fantasma)})
+        config.iniciarFantasmas(config.tiempoAlAzar()) // Inicializamos tres fantasmas en un tiempo al azar
 
-        config.configurarTeclas()
-        // esta línea ejecuta la configuración de las TECLAS del nivel
-        // config se encuentra en el archivo "configuracion"
+        visuales.todosLosStats().forEach({elemento => game.addVisual(elemento)})  // Se añaden TODOS los stats visuales a la escena
 
-        //todosLosFantasmas.forEach({f => f.aparecer()})
-
-        config.anadirDeAUnFantasma(config.tiempoAlAzar())
-
-        //game.schedule(300000, "finJornada")
-        temporizador.correrTiempo()
-        game.addVisual(stats)
         game.addVisual(cartelReloj)
-        game.addVisual(temporizador)
-        game.addVisual(textoClientesAtendidos)
-        game.addVisual(textoClientesPerdidos)
-        game.addVisual(textoFantasmasVisibles)
+        game.addVisual(temporizador) // Se añade el temporizador visual a la escena
+
+        temporizador.correrTiempo() // Se inicializa el temporizador de la partida
+
     }
 
 }
 
+// NIVEL 2
 object nivel2 {
 
     method iniciar() {
-      
+      // definir
     }
 
 }
 
+// MENÚ PRINCIPAL
 object menu {
 
-    // empezar (nivel1 o nivel2), controles, salir del juego
-
+    // INICIALIZAR MENÚ PRINCIPAL
     method iniciar() {
-        if (!game.hasVisual(pantallaMenu)) game.addVisual(pantallaMenu)
-        //nivel 1
-        keyboard.num1().onPressDo({ 
 
-            if (game.hasVisual(pantallaMenu)){
+        if (!game.hasVisual(pantallaMenu)) game.addVisual(pantallaMenu) // Se asegura de mostrar el menú, si no, lo añade
+        
+        // TECLA INICIAR NIVEL 1
+        keyboard.num1().onPressDo({ 
+            if (game.hasVisual(pantallaMenu)){ // Se asegura que estemos en el menú
                 self.ocultarMenu()
                 nivel1.iniciar()
             }
-
         })
-        //nivel 2
-        keyboard.num2().onPressDo({ 
 
-            if (game.hasVisual(pantallaMenu)){
+        // TECLA INICIAR NIVEL 2
+        keyboard.num2().onPressDo({ 
+            if (game.hasVisual(pantallaMenu)){ // Se asegura que estemos en el menú
                 self.ocultarMenu()
                 nivel2.iniciar()
             }
-
         })
-        //teclas
+
+        // TECLA INICIAR MENÚ CONTROLES
         keyboard.c().onPressDo({ 
-
-            if (game.hasVisual(pantallaMenu)){
+            if (game.hasVisual(pantallaMenu)){ // Se asegura que estemos en el menú
                 self.ocultarMenu()
-                teclas.mostrar()
+                controles.iniciar()
             }
-
         })
+
+        // TECLA SALIR DEL JUEGO
+        keyboard.shift().onPressDo({
+            if (game.hasVisual(pantallaMenu)){ // Se asegura que estemos en el menú
+                game.stop()
+            }
+        })
+
     }
 
+    // MÉTODO PARA OCULTAR EL MENÚ
     method ocultarMenu() {
-        if (game.hasVisual(pantallaMenu))
+        if (game.hasVisual(pantallaMenu)) // Se asegura que estemos en el menú
             game.removeVisual(pantallaMenu)
  	} 
 }
 
+// VISUAL DEL MENÚ PRINCIPAL
 object pantallaMenu {
     const property image = "finalMenu.png"
     const property position = game.at(0, 0) 
 }
 
-object teclas {
-    const property image = "menuTeclado.png"
-    const property position = game.at(0, 0) 
+// MENÚ CONTROLES
+object controles {
 
-    method mostrar() {
-        game.addVisual(self)
+    // INICIALIZAR MENÚ CONTROLES
+    method iniciar() {
 
+        game.addVisual(pantallaControles)
+
+        // TECLA VOLVER AL MENÚ PRINCIPAL
         keyboard.c().onPressDo({ 
-
-            if (game.hasVisual(self)){
-                game.removeVisual(self)
+            if (game.hasVisual(pantallaControles)){
+                game.removeVisual(pantallaControles)
                 menu.iniciar()
             }
-
         })
     }
 }
 
+// VISUAL DE CONTROLES
+object pantallaControles {
 
+    const property image = "menuTeclado.png"
+    const property position = game.at(0, 0) 
+
+}
+
+// PANTALLA VICTORIA
 object victoria {
 
     method iniciar() {
@@ -122,6 +133,16 @@ object victoria {
 
 }
 
+// VISUAL DE VICTORIA
+object pantallaVictoria {
+
+    // volver al menu, salir del juego
+    method image() = "victoria.png"
+    method position() = game.at(0, 0)
+
+}
+
+// PANTALLA DERROTA
 object derrota {
 
     method iniciar() {
@@ -129,22 +150,12 @@ object derrota {
     }
 
 }
-object pantallaVictoria {
 
-    // volver al menu, salir del juego
-
-    method image() = "victoria.png"
-
-    method position() = game.at(0, 0)
-
-}
-
+// VISUAL DE DERROTA
 object pantallaDerrota {
 
     // reiniciar, volver al menu, salir del juego
-
     method image() = "derrota.png"
-
     method position() = game.at(0, 0)
 
 }

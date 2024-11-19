@@ -58,8 +58,9 @@ object mozo {
 	
 	method perderCliente() {
 		clientesPerdidos += 1
-		if (clientesPerdidos == 3)
+		if (clientesPerdidos == 3){
 			game.schedule(3000, {game.clear() derrota.iniciar()})
+		}
 	}
 
 	//method image() = "mozoPrueba.png" // imagen de prueba

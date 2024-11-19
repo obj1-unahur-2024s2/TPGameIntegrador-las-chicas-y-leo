@@ -4,17 +4,18 @@ import elementos.*
 import clientes.*
 import configuracion.*
 import niveles.*
+import textoystatsvisuales.*
 object temporizador {
 
 	var tiempo = 150
 
 	method tiempo() = tiempo
 
+	method position() = game.at(16,10)
+
 	method text() = self.transformarTiempo()
 
 	method textColor() = paleta.blanco()
-
-	method position() = game.at(16,10)
 
 	method reiniciar() {
 		tiempo = 150
@@ -34,6 +35,8 @@ object temporizador {
 		}})
 	}
 
+	// MÉTODOS DE FORMATO MM:SS
+
 	method transformarTiempo() {
 		const minutos = (tiempo / 60.0).truncate(0)
 		const segundosRestantes = tiempo % 60
@@ -50,12 +53,7 @@ object temporizador {
 
 }
 
-object paleta {
-	const property blanco = "FFFFFFFF"
-
-}
-
-
+// VISUAL DEL FONDO DEL RELOJ
 object cartelReloj {
 	method image() = "cartelReloj.png"
 	method position() = game.at(16, 10)
