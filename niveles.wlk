@@ -124,11 +124,26 @@ object pantallaControles {
 
 }
 
+object volverAlMenu {
+    
+    method volverAlMenuDesdePantallaFinal(visual) {
+        keyboard.m().onPressDo({
+            if (game.hasVisual(visual)){
+                game.removeVisual(visual)
+                menu.iniciar()
+            }
+        })
+    }
+}
+
 // PANTALLA VICTORIA
 object victoria {
 
     method iniciar() {
-        if (!game.hasVisual(pantallaVictoria)) game.addVisual(pantallaVictoria)
+
+        if (!game.hasVisual(pantallaVictoria)) {game.addVisual(pantallaVictoria)}
+
+        volverAlMenu.volverAlMenuDesdePantallaFinal(pantallaVictoria)
     }
 
 }
@@ -146,7 +161,9 @@ object pantallaVictoria {
 object derrota {
 
     method iniciar() {
-        if (!game.hasVisual(pantallaDerrota)) game.addVisual(pantallaDerrota)
+        if (!game.hasVisual(pantallaDerrota)) {game.addVisual(pantallaDerrota)}
+
+        volverAlMenu.volverAlMenuDesdePantallaFinal(pantallaDerrota)
     }
 
 }
