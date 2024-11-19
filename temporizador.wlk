@@ -11,7 +11,7 @@ object temporizador {
 
 	method tiempo() = tiempo
 
-	method position() = game.at(16,10)
+	method position() = game.at(16,11)
 
 	method text() = self.transformarTiempo()
 
@@ -58,5 +58,5 @@ object temporizador {
 // VISUAL DEL FONDO DEL RELOJ
 object cartelReloj {
 	method image() = "cartelReloj.png"
-	method position() = game.at(16, 10)
+	method position() = game.at(16, 11)
 }

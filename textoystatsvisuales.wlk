@@ -22,7 +22,7 @@ object visuales {
 
 object textoClientesAtendidos {
 
-    method position() = game.at(14,10)
+    method position() = game.at(15,10)
     method text() = "Clientes atendidos = " + mozo.clienteAtendido().toString()
     method textColor() = paleta.blanco()
 
@@ -30,7 +30,7 @@ object textoClientesAtendidos {
 
 object textoClientesPerdidos {
 
-    method position() = game.at(14,9)
+    method position() = game.at(15,9)
     method text() = "Clientes perdidos = " + mozo.clientesPerdidos().toString()
     method textColor() = paleta.blanco()
 

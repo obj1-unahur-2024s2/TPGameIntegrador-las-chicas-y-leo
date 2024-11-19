@@ -170,7 +170,7 @@ object victoria {
 object pantallaVictoria {
 
     // volver al menu, salir del juego
-    method image() = "victoria.png"
+    method image() = "ganaste.png"
     method position() = game.at(0, 0)
 
 }

@@ -12,7 +12,7 @@ program ghostCoffee {
 	game.cellSize(64)
 	// resolucion total = 1152 x 768
 
-	game.boardGround("restauranteFondo.png") // fondo de testeo
+	game.boardGround("fondoCoffee.png") // fondo de testeo
 
 	menu.iniciar()
 	
