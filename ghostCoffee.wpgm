@@ -5,7 +5,6 @@ import sonido.*
 // este script es el INICIAL, donde podremos ejecutar el videojuego
 
 program ghostCoffee {
-
 	game.title("Ghost Coffee")
 
 	game.width(18)

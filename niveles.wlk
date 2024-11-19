@@ -11,10 +11,8 @@ import sonido.*
 
 // NIVEL 1
 object nivel1 {
-
     // INICIALIZAR NIVEL 1
     method iniciar() {
-
         config.configurarTeclas() // Ejecuta la configuración de las TECLAS del niveL
 
         game.addVisual(mozo)
@@ -38,16 +36,14 @@ object nivel1 {
 
         temporizador.correrTiempo() // Se inicializa el temporizador de la partida
 
+        quieroCafe.play()
     }
-
 }
 
 // NIVEL 2
 object nivel2 {
-
     // INICIALIZAR NIVEL 2
     method iniciar() {
-
         config.configurarTeclas() // Ejecuta la configuración de las TECLAS del niveL
 
         game.addVisual(mozo)
@@ -72,14 +68,11 @@ object nivel2 {
         mozo.actualizarCondicionPerdida(1)
 
         temporizador.correrTiempo() // Se inicializa el temporizador de la partida
-
     }
-
 }
 
 // MENÚ PRINCIPAL
 object menu {
-
     // INICIALIZAR MENÚ PRINCIPAL
     method iniciar() {
 
@@ -115,7 +108,6 @@ object menu {
                 game.stop()
             }
         })
-
     }
 
     // MÉTODO PARA OCULTAR EL MENÚ
@@ -123,7 +115,6 @@ object menu {
         if (game.hasVisual(pantallaMenu)) // Se asegura que estemos en el menú
             game.removeVisual(pantallaMenu)
  	} 
-
 }
 
 // VISUAL DEL MENÚ PRINCIPAL
@@ -134,7 +125,6 @@ object pantallaMenu {
 
 // MENÚ CONTROLES
 object controles {
-
     // INICIALIZAR MENÚ CONTROLES
     method iniciar() {
 
@@ -152,14 +142,11 @@ object controles {
 
 // VISUAL DE CONTROLES
 object pantallaControles {
-
     const property image = "menuTeclado.png"
     const property position = game.at(0, 0) 
-
 }
 
 object volverAlMenu {
-    
     method volverAlMenuDesdePantallaFinal(visual) {
         keyboard.m().onPressDo({
             if (game.hasVisual(visual)){
@@ -172,41 +159,33 @@ object volverAlMenu {
 
 // PANTALLA VICTORIA
 object victoria {
-
     method iniciar() {
 
         if (!game.hasVisual(pantallaVictoria)) {game.addVisual(pantallaVictoria)}
 
         volverAlMenu.volverAlMenuDesdePantallaFinal(pantallaVictoria)
     }
-
 }
 
 // VISUAL DE VICTORIA
 object pantallaVictoria {
-
     // volver al menu, salir del juego
     method image() = "ganaste.png"
     method position() = game.at(0, 0)
-
 }
 
 // PANTALLA DERROTA
 object derrota {
-
     method iniciar() {
         if (!game.hasVisual(pantallaDerrota)) {game.addVisual(pantallaDerrota)}
 
         volverAlMenu.volverAlMenuDesdePantallaFinal(pantallaDerrota)
     }
-
 }
 
 // VISUAL DE DERROTA
 object pantallaDerrota {
-
     // reiniciar, volver al menu, salir del juego
     method image() = "perdiste.png"
     method position() = game.at(0, 0)
-
 }

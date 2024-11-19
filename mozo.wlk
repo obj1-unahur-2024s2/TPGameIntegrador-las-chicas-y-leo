@@ -8,7 +8,6 @@ import pedidos.*
 // este script contiene el modelo del MOZO, nuestro personaje principal
 
 object mozo {
-
 	var position = game.at(1,1)
 
 	var image = "fantasmaFrenteSinCafe.png"
@@ -183,5 +182,4 @@ object mozo {
 	method mostrarImagenEspalda() {
 		if (self.tieneCafeEnMano()) image = "fantasmaEspaldaConCafe.png" else image = "fantasmaEspaldaSinCafe.png"
 	}
-
 }

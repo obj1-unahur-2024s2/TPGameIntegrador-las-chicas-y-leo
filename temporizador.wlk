@@ -6,7 +6,6 @@ import configuracion.*
 import niveles.*
 import textoystatsvisuales.*
 object temporizador {
-
 	var tiempo = 150
 
 	method tiempo() = tiempo
@@ -42,7 +41,6 @@ object temporizador {
 	}
 
 	// MÉTODOS DE FORMATO MM:SS
-
 	method transformarTiempo() {
 		const minutos = (tiempo / 60.0).truncate(0)
 		const segundosRestantes = tiempo % 60
@@ -56,7 +54,6 @@ object temporizador {
             return numero.toString()
         }
 	}
-
 }
 
 // VISUAL DEL FONDO DEL RELOJ

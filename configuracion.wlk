@@ -11,9 +11,7 @@ import sonido.*
 // este script contiene la CONFIGURACIÓN de las teclas, colisiones, etc.
 
 object config {
-
 	method configurarTeclas() {
-
 		// TECLAS DE MOVIMIENTO
 		// Actualiza la posición del mozo si puede moverse + su imagen orientada en dicha dirección
 
@@ -33,34 +31,29 @@ object config {
 		// TECLAS DE SONIDO
 
 		keyboard.q().onPressDo({quieroCafe.iniciarAudio()})
-
     }
 
 	// MÉTODOS DE INTERACCIÓN
 
 	method interaccionTomarPedidoAFantasma() {
-
 		if (mozo.hayFantasmaParaTomarPedido()){ // Se asegura que haya un fantasma en la lindante para tomar un pedido
 			mozo.quitarPedido() // Elimina la burbuja del pedido
 			mozo.crearPedidoEnBarra(new PedidoDeBarra(position = game.origin())) // Crea el pedido en la barra
 			mozo.elFantasmaLindante().tienePedidoEnCurso(true) // Setea el curso del pedido del fantasma
 			mozo.elFantasmaLindante().reiniciar() // reinicia el "reloj" del cliente para que no se continue enojando luego de ser atendido
         }
-
 	}
 
 	method interaccionTomarPedidoDeBarra() {
-
 	    if (mozo.hayPedidoEnBarraParaTomar()){ // Se asegura que haya un pedido en la barra para tomar
 			mozo.tieneCafeEnMano(true) // Setea el mozo a tiene café en mano
 			mozo.borrarPedidoEnBarra() // Borra el pedido de la barra
 			mozo.actualizarImagenMozoAConCafe() // Actualiza la imagen del mozo CON UN CAFÉ en la celda actual, para dar un efecto visual en tiempo real
 		}
-
 	}
 
 	method interaccionServirPedidoAFantasma() {
-        
+    
 		if (mozo.puedeDejarPedido()){ // Se asegura que puede dejare un pedido en la celda lindante
 			mozo.tieneCafeEnMano(false) // Setea el mozo a NO tiene café en mano
 			mozo.ponerPedidoEnMesa() // Pone el pedido en la mesa del fantasma de la celda lindante
@@ -72,7 +65,6 @@ object config {
 	// COLISIONES
 
 	method hayBorde(posicionAMover) {
-
 		// DETECTAR SI HAY BORDE
 		// Este método devuelve si la posición dada contiene alguno de los ejes donde se encuentra el borde de la escena
 
@@ -80,11 +72,9 @@ object config {
 		       posicionAMover.x() == 17||
 			   posicionAMover.y() == 0 ||
 			   posicionAMover.y() == 11
-
 	}
 
 	method hayColision(posicionAMover) {
-
 		// DETECTAR SI HAY COLISIÓN
 
 		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover}) || self.hayBorde(posicionAMover) || barra.hayBarra(posicionAMover)
@@ -97,7 +87,6 @@ object config {
 	// ANIMACIONES
 
 	method reproducirAnimacion(objetoAAnimar, listaDeAnimacion, nombreTick) {
-
 		// Este método reproduce una serie de imágenes de una lista
 
         var indiceAni = 0
@@ -115,7 +104,6 @@ object config {
 	var indice = 0
 
 	method iniciarFantasmas(unTiempo) {
-
 		game.onTick(unTiempo,"anadir fantasma",{
 			cliente.todosLosFantasmas().get(indice).aparecer()
 			indice += 1
@@ -131,11 +119,9 @@ object config {
 	method reiniciarIndice() {
 		indice = 0
 	}
-
 }
 
 object reinicio {
-
 	method reiniciarTodoElNivel() {
 		temporizador.reiniciar()
 		mozo.reiniciarMozo()
@@ -144,5 +130,4 @@ object reinicio {
 		cliente.fantasmasVisibles().clear()
 		config.reiniciarIndice()
 	}
-
 }

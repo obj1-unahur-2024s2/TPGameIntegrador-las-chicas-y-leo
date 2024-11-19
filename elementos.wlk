@@ -5,16 +5,13 @@ import clientes.*
 
 // DEFINICION DE CLASES PARA LOS OBJETOS A UTILIZAR
 class ElementoSolido {
-
     // creamos una clase elemento solido que nos permita definir objetos
     // a los cuales no se los pueda "atravesar"
 
     const property position
-
 }
 
 class SillaIzq inherits ElementoSolido {
-
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})
     }
@@ -22,10 +19,8 @@ class SillaIzq inherits ElementoSolido {
     method orientacion() = "izquierda"
 
     method image() = "restauranteSillaIzquierda.png"
-
 }
 class SillaDer inherits ElementoSolido {
-
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})
     }
@@ -33,22 +28,16 @@ class SillaDer inherits ElementoSolido {
     method orientacion() = "derecha"
 
     method image() = "restauranteSillaDerecha.png"
-
 }
-class MesaIzq inherits ElementoSolido {
-    
+class MesaIzq inherits ElementoSolido { 
     method image() = "restauranteMesaIzq.png"
-
 }
 
 class MesaDer inherits ElementoSolido {
-    
     method image() = "restauranteMesaDer.png"
-
 }
 
 object barra {
-    
     method position() = game.at(1, 9)
 
     method posiciones() = [game.at(2, 9), game.at(3, 9), game.at(4, 9), game.at(5, 9), game.at(6, 9), game.at(7, 9), game.at(8, 9), game.at(9, 9)]
@@ -62,11 +51,9 @@ object barra {
     method posicionOcupada(unaPosicion) {
         return not game.getObjectsIn(unaPosicion).isEmpty()
     }
-
 }
 
 object elementoSolido {
-
     // CREACIÓN DE LOS OBJETOS A UTILIZAR
 
     const property todosLosElementosSolidos = [sillaDer1, sillaIzq1, mesaIzq1, mesaDer1, sillaDer2, sillaIzq2, mesaIzq2, mesaDer2, sillaDer3, sillaIzq3, mesaIzq3,mesaDer3,
@@ -109,5 +96,4 @@ object elementoSolido {
     const sillaIzq5 = new SillaDer(position = game.at(14,7))
     const mesaIzq5 = new MesaIzq(position = game.at(12,7))
     const mesaDer5 = new MesaDer(position = game.at(13,7))
-
 }

@@ -7,7 +7,6 @@ import pedidos.*
 // este script contiene el modelo de los CLIENTES que deberemos atender en el videojuego.
 
 class Cliente {
-
     const property nroFantasma
   
     var position = game.origin()
@@ -23,34 +22,25 @@ class Cliente {
     var property miPedido = new PedidoFantasma(fantasmaAsignado=self) // burbuja de pedido
     
     var tiempoAsignado = 30
-
     var tiempo = tiempoAsignado
-
     method position() = position
-
     method tiempo() = tiempo
-
     method tiempoAsignado() = tiempoAsignado
-
 	method reiniciar() {
 		tiempo = tiempoAsignado
         image = "clienteNORMAL.png"
 	}
-
     method reiniciarYParar(nombreTick) {
         tiempo = tiempoAsignado
         game.removeTickEvent(nombreTick)
     }
-
 	method pasarSegundo() {
 		tiempo -= 1
 	}
-
     method actualizarRelojFantasma(unTiempo) {
         tiempoAsignado = unTiempo
         tiempo = unTiempo
     }
-
 	method correrTiempo(nombreTick) {
 		game.onTick(1000, nombreTick, {
 		self.pasarSegundo()
@@ -60,7 +50,6 @@ class Cliente {
             self.desaparecerEnojado()
 		})
 	}
-
     method desaparecer() {
         config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
         self.borrarPedidoEnMesa()
@@ -141,12 +130,10 @@ class Cliente {
 	method borrarPedidoEnMesa() {
 		game.removeVisual(self.cafeEnLaLindante())
 	}
-
 }
 
 // CLIENTE LISTAS E INSTANCIAS
 object cliente {
-
     const property todosLosFantasmas = [fantasma1, fantasma2, fantasma3, fantasma4, fantasma5, fantasma6]
     const property fantasmasVisibles = []
 
@@ -156,5 +143,4 @@ object cliente {
     const property fantasma4 = new Cliente(nroFantasma="4")
     const property fantasma5 = new Cliente(nroFantasma="5")
     const property fantasma6 = new Cliente(nroFantasma="6")
-
 }
