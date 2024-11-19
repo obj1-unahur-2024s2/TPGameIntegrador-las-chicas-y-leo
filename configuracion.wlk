@@ -1,3 +1,4 @@
+import temporizador.*
 import wollok.game.*
 import mozo.*
 import clientes.*
@@ -94,21 +95,21 @@ object config {
 
 		// Este método reproduce una serie de imágenes de una lista
 
-        var indice = 0
+        var indiceAni = 0
 
         game.onTick(500,nombreTick,{
-            objetoAAnimar.image(listaDeAnimacion.get(indice))
-            indice += 1
-            if (indice == listaDeAnimacion.size())
+            objetoAAnimar.image(listaDeAnimacion.get(indiceAni))
+            indiceAni += 1
+            if (indiceAni == listaDeAnimacion.size())
                 game.removeTickEvent(nombreTick)
             })
 	}
 
 	// INICIALIZACIÓN
 
-	method iniciarFantasmas(unTiempo) {
+	var indice = 0
 
-		var indice = 0
+	method iniciarFantasmas(unTiempo) {
 
 		game.onTick(unTiempo,"anadir fantasma",{
 			cliente.todosLosFantasmas().get(indice).aparecer()
@@ -120,6 +121,23 @@ object config {
 
 	method tiempoAlAzar() {
 		return 3000.randomUpTo(6000)
+	}
+
+	method reiniciarIndice() {
+		indice = 0
+	}
+
+}
+
+object reinicio {
+
+	method reiniciarTodoNivelUno() {
+		temporizador.reiniciar()
+		mozo.reiniciarMozo()
+		cliente.fantasmasVisibles().forEach({f => f.reiniciarYParar("relojCliente"+f.nroFantasma())})
+		cliente.fantasmasVisibles().forEach({f => f.image("f6.png")})
+		cliente.fantasmasVisibles().clear()
+		config.reiniciarIndice()
 	}
 
 }

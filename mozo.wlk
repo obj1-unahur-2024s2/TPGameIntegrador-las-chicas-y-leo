@@ -26,6 +26,14 @@ object mozo {
 
 	method clientesPerdidos() = clientesPerdidos
 
+	method reiniciarMozo() {
+
+		clienteAtendido = 0
+		clientesPerdidos = 0
+		position = game.at(1,1)
+
+	}
+
 	method celdasLindantes() = [self.position().left(1),
 							   self.position().right(1),
 							   self.position().up(1),
@@ -46,7 +54,7 @@ object mozo {
 	method perderCliente() {
 		clientesPerdidos += 1
 		if (clientesPerdidos >= 3){
-			game.schedule(3000, {game.clear() derrota.iniciar()})
+			game.schedule(3000, {game.clear() reinicio.reiniciarTodoNivelUno() derrota.iniciar()})
 		}
 	}
 	

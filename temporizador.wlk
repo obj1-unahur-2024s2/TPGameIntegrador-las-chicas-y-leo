@@ -7,7 +7,7 @@ import niveles.*
 import textoystatsvisuales.*
 object temporizador {
 
-	var tiempo = 10
+	var tiempo = 150
 
 	method tiempo() = tiempo
 
@@ -18,7 +18,7 @@ object temporizador {
 	method textColor() = paleta.blanco()
 
 	method reiniciar() {
-		tiempo = 10
+		tiempo = 150
 		game.removeTickEvent("tiempo")
 	}
 
@@ -31,6 +31,7 @@ object temporizador {
 		self.pasarSegundo()
 		if (tiempo == 0) {
 			game.clear()
+			reinicio.reiniciarTodoNivelUno()
 			victoria.iniciar()
 			//game.addVisual(pantallaVictoria)
 		}})

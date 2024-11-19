@@ -38,8 +38,26 @@ object nivel1 {
 // NIVEL 2
 object nivel2 {
 
+    // INICIALIZAR NIVEL 1
     method iniciar() {
-      // definir
+
+        config.configurarTeclas() // Ejecuta la configuración de las TECLAS del niveL
+
+        game.addVisual(mozo)
+        // Añadimos al mozo a la escena, optamos por quitarle el "character" ya que
+        // Precisamos controlar las acciones del teclado para las colisiones y otras necesidades
+        
+        elementoSolido.todosLosElementosSolidos().forEach({elemento => game.addVisual(elemento)}) // Se añaden TODOS los elementos sólidos a la escena
+
+        config.iniciarFantasmas(config.tiempoAlAzar()) // Inicializamos tres fantasmas en un tiempo al azar
+
+        visuales.todosLosStats().forEach({elemento => game.addVisual(elemento)})  // Se añaden TODOS los stats visuales a la escena
+
+        game.addVisual(cartelReloj)
+        game.addVisual(temporizador) // Se añade el temporizador visual a la escena
+
+        temporizador.correrTiempo() // Se inicializa el temporizador de la partida
+
     }
 
 }

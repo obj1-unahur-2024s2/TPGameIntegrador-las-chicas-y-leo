@@ -17,8 +17,8 @@ class Cliente {
     var property tienePedidoEnCurso = false
 
     const property animacionAparecer = animacionDesaparecer.reverse()
-    const property animacionDesaparecer = ["clienteNORMAL.png", "clienteNORMAL1.png","clienteNORMAL2.png","clienteNORMAL3.png","clienteNORMAL4.png"]
-    const property animacionDesaparecerEnojado = ["clienteENOJADO.png", "clienteENOJADO1.png","clienteENOJADO2.png","clienteENOJADO3.png","clienteENOJADO4.png"]
+    const property animacionDesaparecer = ["clienteNORMAL.png", "clienteNORMAL1.png","clienteNORMAL2.png","clienteNORMAL3.png","clienteNORMAL4.png", "f6.png"]
+    const property animacionDesaparecerEnojado = ["clienteENOJADO.png", "clienteENOJADO1.png","clienteENOJADO2.png","clienteENOJADO3.png","clienteENOJADO4.png", "f6.png"]
 
     var property miPedido = new PedidoFantasma(fantasmaAsignado=self) // burbuja de pedido
     
@@ -34,7 +34,7 @@ class Cliente {
 	}
 
     method reiniciarYParar(nombreTick) {
-        self.reiniciar()
+        tiempo = 30
         game.removeTickEvent(nombreTick)
     }
 
