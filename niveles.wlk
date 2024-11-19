@@ -38,8 +38,6 @@ object nivel1 {
 
         temporizador.correrTiempo() // Se inicializa el temporizador de la partida
 
-        quieroCafe.play()
-
     }
 
 }
@@ -125,6 +123,7 @@ object menu {
         if (game.hasVisual(pantallaMenu)) // Se asegura que estemos en el menú
             game.removeVisual(pantallaMenu)
  	} 
+
 }
 
 // VISUAL DEL MENÚ PRINCIPAL

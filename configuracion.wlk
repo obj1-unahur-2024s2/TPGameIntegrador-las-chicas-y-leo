@@ -5,6 +5,7 @@ import clientes.*
 import elementos.*
 import niveles.*
 import pedidos.*
+import sonido.*
 
 
 // este script contiene la CONFIGURACIÓN de las teclas, colisiones, etc.
@@ -28,6 +29,10 @@ object config {
 		keyboard.a().onPressDo({self.interaccionTomarPedidoDeBarra()}) // Toma el pedido de la barra en la celda lindante
 
 		keyboard.d().onPressDo({self.interaccionServirPedidoAFantasma()}) // Sirve el pedido en mano al cliente en la celda lindante
+
+		// TECLAS DE SONIDO
+
+		keyboard.q().onPressDo({quieroCafe.iniciarAudio()})
 
     }
 

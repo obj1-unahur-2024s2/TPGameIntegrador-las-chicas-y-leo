@@ -41,7 +41,7 @@ object textoClientesPerdidos {
 object stats {
 
     method position() = game.at(14,9)
-    method image() = "cuadradoDeStats.png"
+    method image() = "cuadradoStats.png"
 
 }
 
