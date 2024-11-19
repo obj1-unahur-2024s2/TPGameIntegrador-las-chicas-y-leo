@@ -30,3 +30,11 @@ class PedidoDeBarra {
     }
 
 }
+
+class TazaMesa {
+
+    const property image = "tazaMesa.png"
+    
+    var property position
+
+}

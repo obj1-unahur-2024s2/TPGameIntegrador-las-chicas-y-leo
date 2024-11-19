@@ -8,10 +8,9 @@ import pedidos.*
 
 class Cliente {
 
-    //var property estoyVisible
     const property nroFantasma
   
-    var property position = game.origin()
+    var position = game.origin()
 
     var property image = "f6.png"
 
@@ -21,31 +20,23 @@ class Cliente {
     const property animacionDesaparecer = ["clienteNORMAL.png", "clienteNORMAL1.png","clienteNORMAL2.png","clienteNORMAL3.png","clienteNORMAL4.png"]
     const property animacionDesaparecerEnojado = ["clienteENOJADO.png", "clienteENOJADO1.png","clienteENOJADO2.png","clienteENOJADO3.png","clienteENOJADO4.png"]
 
-    var property miPedido = new PedidoFantasma(fantasmaAsignado=self) // globito
-
-	method celdasALosLados() = [self.position().left(1), self.position().right(1)]
+    var property miPedido = new PedidoFantasma(fantasmaAsignado=self) // burbuja de pedido
     
     var tiempo = 30
 
-	method tiempo() = tiempo
+    method position() = position
+
+    method tiempo() = tiempo
 
 	method reiniciar() {
 		tiempo = 30
         image = "clienteNORMAL.png"
 	}
 
-    method recibirPedido() {
-        self.tienePedidoEnCurso(false)
-        self.reiniciarYParar("relojCliente"+nroFantasma)
-        image = "clienteNORMAL.png"
-        game.schedule(6000, {self.desaparecer()})
-    }
-
     method reiniciarYParar(nombreTick) {
         self.reiniciar()
         game.removeTickEvent(nombreTick)
     }
-
 
 	method pasarSegundo() {
 		tiempo -= 1
@@ -64,23 +55,16 @@ class Cliente {
     method desaparecer() {
         config.reproducirAnimacion(self, animacionDesaparecer, "animacionDesaparecer")
         self.borrarPedidoEnMesa()
-        //cliente.fantasmasVisibles().remove(self)
         mozo.sumarClienteAtendido()
         game.schedule(3000,{game.removeVisual(self)})
         self.aparecerNuevoFantasma()
         cliente.fantasmasVisibles().remove(self)
-        
-        //cliente.fantasmasVisibles().remove(self) // volver a poner en schedule?
-        //estoyVisible=false
-        //game.schedule(5000, {cliente.todosLosFantasmas().find({f => not cliente.fantasmasVisibles().contains(f)})})
-        //game.schedule(3000, {config.anadirDeAUnFantasma(config.tiempoAlAzar())})
     }
 
     method desaparecerEnojado() {
         self.tienePedidoEnCurso(false)
         self.reiniciarYParar("relojCliente"+nroFantasma)
         config.reproducirAnimacion(self, animacionDesaparecerEnojado, "animacionDesaparecerEnojado")
-        //cliente.fantasmasVisibles().remove(self)
         mozo.perderCliente()
         if (game.hasVisual(miPedido)) {
             game.removeVisual(miPedido)
@@ -88,27 +72,22 @@ class Cliente {
         game.schedule(3000,{game.removeVisual(self)})
         self.aparecerNuevoFantasma()
         cliente.fantasmasVisibles().remove(self)
-        //cliente.fantasmasVisibles().remove(self)
-        //estoyVisible=false
-        //game.schedule(3000, {config.anadirDeAUnFantasma(config.tiempoAlAzar())})
-        
     }
-
-    
-    method aparecerNuevoFantasma() {
-        game.schedule(7000, { cliente.todosLosFantasmas().find({f => not cliente.fantasmasVisibles().contains(f)}).aparecer() })
-    }
-    
 
     method aparecer() {
         position = self.encontrarSillaDesocupada()
         cliente.fantasmasVisibles().add(self)
         game.addVisual(self)
         config.reproducirAnimacion(self, animacionAparecer, "animacionAparecer")
-        //estoyVisible=true // ver si se usa
         self.mostrarPedido()
         self.correrTiempo("relojCliente"+nroFantasma)
     }
+
+    method aparecerNuevoFantasma() {
+        game.schedule(7000, { cliente.todosLosFantasmas().find({f => not cliente.fantasmasVisibles().contains(f)}).aparecer() })
+    }
+
+    method celdasALosLados() = [self.position().left(1), self.position().right(1)]
 
     method encontrarSillaDesocupada() {
 
@@ -121,17 +100,18 @@ class Cliente {
         game.schedule(6000,{game.addVisual(miPedido)})
     }
 
-    method comer() {}
+    method recibirPedido() {
+        self.tienePedidoEnCurso(false)
+        self.reiniciarYParar("relojCliente"+nroFantasma)
+        image = "clienteNORMAL.png"
+        game.schedule(6000, {self.desaparecer()})
+    }
 
     method enojarse() {
         image = "clienteENOJADO.png"
     }
 
-    method desenojarse() {}
-
-    method borrarPedido() {
-        
-    }
+    // CAFE EN MESA
     
 	method hayCafeEnMesa(unaPosicion) {
 		return game.getObjectsIn(unaPosicion).size() == 2
@@ -155,6 +135,7 @@ class Cliente {
 
 }
 
+// CLIENTE LISTAS E INSTANCIAS
 object cliente {
 
     const property todosLosFantasmas = [fantasma1, fantasma2, fantasma3, fantasma4, fantasma5, fantasma6] //, otroFantasma, yOtroFantasma, esteFantasma, cheFantasma]

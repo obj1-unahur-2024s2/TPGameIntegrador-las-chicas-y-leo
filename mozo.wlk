@@ -3,24 +3,22 @@ import wollok.game.*
 import configuracion.*
 import clientes.*
 import elementos.*
+import pedidos.*
 
 // este script contiene el modelo del MOZO, nuestro personaje principal
 
 object mozo {
 
-	// var property image = "fantasmaFrenteSinCafe.png"
+	var position = game.at(1,1)
+
 	var image = "fantasmaFrenteSinCafe.png"
 
 	var clientesPerdidos = 0
 	var clienteAtendido = 0
 
-	var property tieneCafeEnMano = false
+	var property tieneCafeEnMano = false // cambiar
 
-	/*
-	method image(unaImagen) {
-		image = unaImagen
-	}
-	*/
+	method position() = position
 
 	method image() = image
 
@@ -28,31 +26,18 @@ object mozo {
 
 	method clientesPerdidos() = clientesPerdidos
 
-	method actualizarImagenMozoASinCafe() {
-			image = image.replace("ConCafe.png", "SinCafe.png")
-	}
-
-	method actualizarImagenMozoAConCafe() {
-		image = image.replace("SinCafe.png", "ConCafe.png")
-	}
-
-    var position = game.at(1,1) // posicion inicial que irá variando con el movimiento
-	// var lastPosition = position // la posicion ANTERIOR a la actual en la que se encontraba el mozo (verificar si se usa)
-
-	method position() = position // getter
-
-	// method lastPosition() = position // getter
-
 	method celdasLindantes() = [self.position().left(1),
 							   self.position().right(1),
 							   self.position().up(1),
 							   self.position().down(1)]
 
-    method crearPedidoEnBarra(unPedidoDeBarra) {
-			unPedidoDeBarra.position(unPedidoDeBarra.encontrarLugarLibreEnBarra())
-			game.addVisual(unPedidoDeBarra)
-            //game.addVisual(new PedidoBarra(fantasmaAsignado=self))
-        }
+	method irA(nuevaPosicion) {
+
+		if (not config.hayColision(nuevaPosicion)) { // se verifica que en la posición a moverse NO se genere una colisión entre el mozo y un elemento sólido
+			position = nuevaPosicion // se actualiza la posición
+		}
+		else {position = self.position()} // si hay una colisión, el mozo se queda en la posición actual
+	}
 
 	method sumarClienteAtendido() {
 		clienteAtendido += 1
@@ -64,75 +49,50 @@ object mozo {
 			game.schedule(3000, {game.clear() derrota.iniciar()})
 		}
 	}
+	
+	method crearPedidoEnBarra(unPedidoDeBarra) {
+		unPedidoDeBarra.position(unPedidoDeBarra.encontrarLugarLibreEnBarra())
+		game.addVisual(unPedidoDeBarra)
+    }
 
-	//method image() = "mozoPrueba.png" // imagen de prueba
+	method quitarPedido() {
+		game.removeVisual(self.elFantasmaLindante().miPedido()) // Elimina la burbuja de pedido
+	}
 
-	method irA(nuevaPosicion) {
+	// FANTASMAS LINDANTES
 
-		if (not config.hayColision(nuevaPosicion)) {
-			// se verifica que en la posición a moverse NO se genere una colisión entre el mozo y un elemento sólido
-
-			// lastPosition = position // antes de moverse, se guarda la posición actual (que luego de moverse será la ANTERIOR)
-			position = nuevaPosicion // se actualiza la posición
-			
-			}
-
-		else {position = self.position()} // si hay una colisión, el mozo se queda en la posición actual
+	method hayFantasma(unaPosicion) {
+		return cliente.fantasmasVisibles().any({f=>f.position() == unaPosicion})
 	}
 
 	method hayFantasmaEnCeldaLindante() {
-
 		return self.celdasLindantes().any({c => self.hayFantasma(c)})
-
 	}
 
-	method hayFantasma(unaPosicion) {
+	method posicionDelFantasmaLindante() {
+		return self.celdasLindantes().find({c => self.hayFantasma(c)})
+	}
 
-		return cliente.fantasmasVisibles().any({f=>f.position() == unaPosicion})
+	method elFantasmaLindante() {
+		return game.getObjectsIn(self.posicionDelFantasmaLindante()).get(1)
+	}
 
+	method hayFantasmaParaTomarPedido() {
+		return self.hayFantasmaEnCeldaLindante() and game.hasVisual(self.elFantasmaLindante().miPedido())
+	}
+
+	// PEDIDOS EN BARRA
+
+	method hayPedidoEnBarra(unaPosicion) {
+		return barra.posiciones().any({p => p == unaPosicion and game.getObjectsIn(unaPosicion).size() == 1})
 	}
 	
 	method hayPedidoEnBarraEnCeldaLindante() {
-
 		return self.celdasLindantes().any({c => self.hayPedidoEnBarra(c)})
-
 	}
 
-	method hayPedidoEnBarra(unaPosicion) {
-
-		//return game.getObjectsIn(unaPosicion).size() == 1
-		return barra.posiciones().any({p => p == unaPosicion and game.getObjectsIn(unaPosicion).size() == 1})
-
-	}
-
-	method hayPedidoEnBarraParaTomar() = self.hayPedidoEnBarraEnCeldaLindante() and not self.tieneCafeEnMano()
-
-	method posicionDelFantasmaLindante() = self.celdasLindantes().find({c => self.hayFantasma(c)})
-
-	method elFantasmaLindante() = game.getObjectsIn(self.posicionDelFantasmaLindante()).get(1)
-
-	method hayFantasmaParaTomarPedido() = self.hayFantasmaEnCeldaLindante() and game.hasVisual(self.elFantasmaLindante().miPedido())
-
-	method quitarPedido(){
-
-			game.removeVisual(self.elFantasmaLindante().miPedido())
-
-	} 
-
-	method mostrarImagenIzquierda() {
-		if (self.tieneCafeEnMano()) image = "fantasmaIzquierdaConCafe.png" else image = "fantasmaIzquierdaSinCafe.png"
-	}
-
-	method mostrarImagenDerecha() {
-		if (self.tieneCafeEnMano()) image = "fantasmaDerechaConCafe.png" else image = "fantasmaDerechaSinCafe.png"
-	}
-
-	method mostrarImagenFrente() {
-		return if (self.tieneCafeEnMano()) image = "fantasmaFrenteConCafe.png" else image = "fantasmaFrenteSinCafe.png"
-	}
-
-	method mostrarImagenEspalda() {
-		return if (self.tieneCafeEnMano()) image = "fantasmaEspaldaConCafe.png" else image = "fantasmaEspaldaSinCafe.png"
+	method hayPedidoEnBarraParaTomar() {
+		return self.hayPedidoEnBarraEnCeldaLindante() and not self.tieneCafeEnMano()
 	}
 
 	method borrarPedidoEnBarra() {
@@ -147,7 +107,11 @@ object mozo {
 		return self.celdasLindantes().find({c => self.hayPedidoEnBarra(c)})
 	}
 
-	method puedeDejarPedido() = self.hayFantasmaEnCeldaLindante() and self.tieneCafeEnMano() and not game.hasVisual(self.elFantasmaLindante().miPedido()) and self.elFantasmaLindante().tienePedidoEnCurso()
+	// CAFE EN LA MESA
+
+	method puedeDejarPedido() {
+		return self.hayFantasmaEnCeldaLindante() and self.tieneCafeEnMano() and not game.hasVisual(self.elFantasmaLindante().miPedido()) and self.elFantasmaLindante().tienePedidoEnCurso()
+	}
 
 	method ponerPedidoEnMesa() {
 		//self.elFantasmaLindante().pedidoEnCurso(false)
@@ -178,12 +142,30 @@ object mozo {
 		game.removeVisual(self.cafeEnLaLindanteAlFantasma())
 	}
 
-}
+	// ACTUALIZACION DE IMAGENES
 
-class TazaMesa {
+	method actualizarImagenMozoASinCafe() {
+		image = image.replace("ConCafe.png", "SinCafe.png")
+	}
 
-    const property image = "tazaMesa.png"
-    
-    var property position
+	method actualizarImagenMozoAConCafe() {
+		image = image.replace("SinCafe.png", "ConCafe.png")
+	}
+
+	method mostrarImagenIzquierda() {
+		if (self.tieneCafeEnMano()) image = "fantasmaIzquierdaConCafe.png" else image = "fantasmaIzquierdaSinCafe.png"
+	}
+
+	method mostrarImagenDerecha() {
+		if (self.tieneCafeEnMano()) image = "fantasmaDerechaConCafe.png" else image = "fantasmaDerechaSinCafe.png"
+	}
+
+	method mostrarImagenFrente() {
+		if (self.tieneCafeEnMano()) image = "fantasmaFrenteConCafe.png" else image = "fantasmaFrenteSinCafe.png"
+	}
+
+	method mostrarImagenEspalda() {
+		if (self.tieneCafeEnMano()) image = "fantasmaEspaldaConCafe.png" else image = "fantasmaEspaldaSinCafe.png"
+	}
 
 }
