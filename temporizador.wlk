@@ -26,6 +26,10 @@ object temporizador {
 		tiempo -= 1
 	}
 
+	method configurarTemporizador(unTiempo) {
+		tiempo = unTiempo
+	}
+
 	method correrTiempo() {
 		game.onTick(1000, "tiempo", {
 		self.pasarSegundo()

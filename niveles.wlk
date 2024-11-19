@@ -5,6 +5,7 @@ import clientes.*
 import configuracion.*
 import temporizador.*
 import textoystatsvisuales.*
+import sonido.*
 
 // este script contiene los NIVELES y distintas escenas que contendrá nuestro videojuego.
 
@@ -29,7 +30,15 @@ object nivel1 {
         game.addVisual(cartelReloj)
         game.addVisual(temporizador) // Se añade el temporizador visual a la escena
 
+        game.addVisual(visuales.textoNivel1())
+
+        cliente.todosLosFantasmas().forEach({f => f.actualizarRelojFantasma(30)})
+
+        mozo.actualizarCondicionPerdida(3)
+
         temporizador.correrTiempo() // Se inicializa el temporizador de la partida
+
+        quieroCafe.play()
 
     }
 
@@ -38,7 +47,7 @@ object nivel1 {
 // NIVEL 2
 object nivel2 {
 
-    // INICIALIZAR NIVEL 1
+    // INICIALIZAR NIVEL 2
     method iniciar() {
 
         config.configurarTeclas() // Ejecuta la configuración de las TECLAS del niveL
@@ -55,6 +64,14 @@ object nivel2 {
 
         game.addVisual(cartelReloj)
         game.addVisual(temporizador) // Se añade el temporizador visual a la escena
+
+        game.addVisual(visuales.textoNivel2())
+
+        temporizador.configurarTemporizador(120)
+
+        cliente.todosLosFantasmas().forEach({f => f.actualizarRelojFantasma(25)})
+
+        mozo.actualizarCondicionPerdida(1)
 
         temporizador.correrTiempo() // Se inicializa el temporizador de la partida
 

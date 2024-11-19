@@ -18,9 +18,17 @@ object mozo {
 
 	var property tieneCafeEnMano = false // cambiar
 
+	var condicionPerdida = 3
+
 	method position() = position
 
 	method image() = image
+
+	method condicionPerdida() = condicionPerdida
+
+	method actualizarCondicionPerdida(unNumero) {
+		condicionPerdida = unNumero
+	}
 
 	method clienteAtendido() = clienteAtendido
 
@@ -53,7 +61,7 @@ object mozo {
 	
 	method perderCliente() {
 		clientesPerdidos += 1
-		if (clientesPerdidos >= 3){
+		if (clientesPerdidos >= self.condicionPerdida()){
 			game.schedule(3000, {game.clear() reinicio.reiniciarTodoNivelUno() derrota.iniciar()})
 		}
 	}

@@ -22,25 +22,34 @@ class Cliente {
 
     var property miPedido = new PedidoFantasma(fantasmaAsignado=self) // burbuja de pedido
     
-    var tiempo = 30
+    var tiempoAsignado = 30
+
+    var tiempo = tiempoAsignado
 
     method position() = position
 
     method tiempo() = tiempo
 
+    method tiempoAsignado() = tiempoAsignado
+
 	method reiniciar() {
-		tiempo = 30
+		tiempo = tiempoAsignado
         image = "clienteNORMAL.png"
 	}
 
     method reiniciarYParar(nombreTick) {
-        tiempo = 30
+        tiempo = tiempoAsignado
         game.removeTickEvent(nombreTick)
     }
 
 	method pasarSegundo() {
 		tiempo -= 1
 	}
+
+    method actualizarRelojFantasma(unTiempo) {
+        tiempoAsignado = unTiempo
+        tiempo = unTiempo
+    }
 
 	method correrTiempo(nombreTick) {
 		game.onTick(1000, nombreTick, {
