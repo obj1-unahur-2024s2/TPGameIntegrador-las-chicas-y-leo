@@ -8,23 +8,26 @@ import elementos.*
 
 object mozo {
 
+	// var property image = "fantasmaFrenteSinCafe.png"
+	var image = "fantasmaFrenteSinCafe.png"
+
 	var clientesPerdidos = 0
-
 	var clienteAtendido = 0
-
-	var property image = "fantasmaFrenteSinCafe.png"
 
 	var property tieneCafeEnMano = false
 
+	/*
 	method image(unaImagen) {
 		image = unaImagen
 	}
+	*/
+
+	method image() = image
 
 	method clienteAtendido() = clienteAtendido
 
 	method clientesPerdidos() = clientesPerdidos
 
-	// replace(expression, replacement)
 	method actualizarImagenMozoASinCafe() {
 			image = image.replace("ConCafe.png", "SinCafe.png")
 	}
@@ -32,7 +35,6 @@ object mozo {
 	method actualizarImagenMozoAConCafe() {
 		image = image.replace("SinCafe.png", "ConCafe.png")
 	}
-
 
     var position = game.at(1,1) // posicion inicial que irá variando con el movimiento
 	// var lastPosition = position // la posicion ANTERIOR a la actual en la que se encontraba el mozo (verificar si se usa)
@@ -58,7 +60,7 @@ object mozo {
 	
 	method perderCliente() {
 		clientesPerdidos += 1
-		if (clientesPerdidos == 3){
+		if (clientesPerdidos >= 3){
 			game.schedule(3000, {game.clear() derrota.iniciar()})
 		}
 	}
@@ -118,19 +120,19 @@ object mozo {
 	} 
 
 	method mostrarImagenIzquierda() {
-		return if (self.tieneCafeEnMano()) "fantasmaIzquierdaConCafe.png" else "fantasmaIzquierdaSinCafe.png"
+		if (self.tieneCafeEnMano()) image = "fantasmaIzquierdaConCafe.png" else image = "fantasmaIzquierdaSinCafe.png"
 	}
 
 	method mostrarImagenDerecha() {
-		return if (self.tieneCafeEnMano()) "fantasmaDerechaConCafe.png" else "fantasmaDerechaSinCafe.png"
+		if (self.tieneCafeEnMano()) image = "fantasmaDerechaConCafe.png" else image = "fantasmaDerechaSinCafe.png"
 	}
 
 	method mostrarImagenFrente() {
-		return if (self.tieneCafeEnMano()) "fantasmaFrenteConCafe.png" else "fantasmaFrenteSinCafe.png"
+		return if (self.tieneCafeEnMano()) image = "fantasmaFrenteConCafe.png" else image = "fantasmaFrenteSinCafe.png"
 	}
 
 	method mostrarImagenEspalda() {
-		return if (self.tieneCafeEnMano()) "fantasmaEspaldaConCafe.png" else "fantasmaEspaldaSinCafe.png"
+		return if (self.tieneCafeEnMano()) image = "fantasmaEspaldaConCafe.png" else image = "fantasmaEspaldaSinCafe.png"
 	}
 
 	method borrarPedidoEnBarra() {

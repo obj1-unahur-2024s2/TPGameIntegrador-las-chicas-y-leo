@@ -15,18 +15,18 @@ object config {
 		// TECLAS DE MOVIMIENTO
 		// Actualiza la posición del mozo si puede moverse + su imagen orientada en dicha dirección
 
-		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1))) mozo.image(mozo.mostrarImagenIzquierda())} )
-		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1)) mozo.image(mozo.mostrarImagenDerecha())} )
-		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1)) mozo.image(mozo.mostrarImagenEspalda())} )
-		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1)) mozo.image(mozo.mostrarImagenFrente())} )
+		keyboard.left().onPressDo( {mozo.irA((mozo.position().left(1))) mozo.mostrarImagenIzquierda()} )
+		keyboard.right().onPressDo( {mozo.irA(mozo.position().right(1)) mozo.mostrarImagenDerecha()} )
+		keyboard.up().onPressDo( {mozo.irA(mozo.position().up(1)) mozo.mostrarImagenEspalda()} )
+		keyboard.down().onPressDo( {mozo.irA(mozo.position().down(1)) mozo.mostrarImagenFrente()} )
 
 		// TECLAS DE INTERACCIÓN
 
-		keyboard.x().onPressDo({self.interaccionTomarPedidoAFantasma()}) // Toma el pedido del cliente en la celda lindante
+		keyboard.w().onPressDo({self.interaccionTomarPedidoAFantasma()}) // Toma el pedido del cliente en la celda lindante
 
-		keyboard.m().onPressDo({self.interaccionTomarPedidoDeBarra()}) // Toma el pedido de la barra en la celda lindante
+		keyboard.a().onPressDo({self.interaccionTomarPedidoDeBarra()}) // Toma el pedido de la barra en la celda lindante
 
-		keyboard.l().onPressDo({self.interaccionServirPedidoAFantasma()}) // Sirve el pedido en mano al cliente en la celda lindante
+		keyboard.d().onPressDo({self.interaccionServirPedidoAFantasma()}) // Sirve el pedido en mano al cliente en la celda lindante
 
     }
 

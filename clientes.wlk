@@ -36,7 +36,7 @@ class Cliente {
 
     method recibirPedido() {
         self.tienePedidoEnCurso(false)
-        self.reiniciarYParar("relojCliente"+nroFantasma.toString())
+        self.reiniciarYParar("relojCliente"+nroFantasma)
         image = "clienteNORMAL.png"
         game.schedule(6000, {self.desaparecer()})
     }
@@ -78,7 +78,7 @@ class Cliente {
 
     method desaparecerEnojado() {
         self.tienePedidoEnCurso(false)
-        self.reiniciarYParar("relojCliente"+nroFantasma.toString())
+        self.reiniciarYParar("relojCliente"+nroFantasma)
         config.reproducirAnimacion(self, animacionDesaparecerEnojado, "animacionDesaparecerEnojado")
         //cliente.fantasmasVisibles().remove(self)
         mozo.perderCliente()
@@ -107,7 +107,7 @@ class Cliente {
         config.reproducirAnimacion(self, animacionAparecer, "animacionAparecer")
         //estoyVisible=true // ver si se usa
         self.mostrarPedido()
-        self.correrTiempo("relojCliente"+nroFantasma.toString())
+        self.correrTiempo("relojCliente"+nroFantasma)
     }
 
     method encontrarSillaDesocupada() {

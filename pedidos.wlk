@@ -29,8 +29,4 @@ class PedidoDeBarra {
         return barra.posiciones().find({p => not barra.posicionOcupada(p)})
     }
 
-    //var estoyEnLaBarra = false
-
-    //method estoyEnLaBarra() = estoyEnLaBarra
-
 }

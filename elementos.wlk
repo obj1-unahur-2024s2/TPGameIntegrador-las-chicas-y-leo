@@ -11,40 +11,38 @@ class ElementoSolido {
 
     const property position
 
-    method esSolido() = true // verificar si se utiliza
-
 }
 
 class SillaIzq inherits ElementoSolido {
 
-    method orientacion() = "izquierda"
-
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})
     }
 
-    method image() = "restauranteSillaIzquierda.png" // aún debemos hacer la imagen "silla"
+    method orientacion() = "izquierda"
+
+    method image() = "restauranteSillaIzquierda.png"
 
 }
 class SillaDer inherits ElementoSolido {
 
-    method orientacion() = "derecha"
-
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})
     }
 
-    method image() = "restauranteSillaDerecha.png" // aún debemos hacer la imagen "silla"
+    method orientacion() = "derecha"
+
+    method image() = "restauranteSillaDerecha.png"
 
 }
 class MesaIzq inherits ElementoSolido {
-    // definir
+    
     method image() = "restauranteMesaIzq.png"
 
 }
 
 class MesaDer inherits ElementoSolido {
-    // definir
+    
     method image() = "restauranteMesaDer.png"
 
 }

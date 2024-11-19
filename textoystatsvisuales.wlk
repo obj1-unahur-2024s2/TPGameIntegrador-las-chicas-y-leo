@@ -12,11 +12,11 @@ class TextoVisual {
 
 object visuales {
     
-    const property todosLosStats = [stats, textoClientesAtendidos, textoClientesPerdidos, textoTeclaX, textoTeclaM, textoTeclaL]
+    const property todosLosStats = [stats, textoClientesAtendidos, textoClientesPerdidos, textoTeclaW, textoTeclaA, textoTeclaD]
 
-    const property textoTeclaX = new TextoVisual(position = game.at(5,0), text="Atender pedido: X", textColor=paleta.blanco())
-    const property textoTeclaM = new TextoVisual(position = game.at(8,0), text="Tomar café de la Barra: M", textColor=paleta.blanco())
-    const property textoTeclaL = new TextoVisual(position = game.at(11,0), text="Entregar café: L", textColor=paleta.blanco())
+    const property textoTeclaW = new TextoVisual(position = game.at(5,0), text="Atender pedido: W", textColor=paleta.blanco())
+    const property textoTeclaA = new TextoVisual(position = game.at(8,0), text="Tomar café de la Barra: A", textColor=paleta.blanco())
+    const property textoTeclaD = new TextoVisual(position = game.at(11,0), text="Entregar café: D", textColor=paleta.blanco())
 
 }
 
