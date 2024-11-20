@@ -6,6 +6,7 @@ import elementos.*
 import niveles.*
 import pedidos.*
 import sonido.*
+import textoystatsvisuales.*
 
 
 // este script contiene la CONFIGURACIÓN de las teclas, colisiones, etc.
@@ -63,7 +64,6 @@ object config {
 	}
 
 	// COLISIONES
-
 	method hayBorde(posicionAMover) {
 		// DETECTAR SI HAY BORDE
 		// Este método devuelve si la posición dada contiene alguno de los ejes donde se encuentra el borde de la escena
@@ -77,7 +77,7 @@ object config {
 	method hayColision(posicionAMover) {
 		// DETECTAR SI HAY COLISIÓN
 
-		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover}) || self.hayBorde(posicionAMover) || barra.hayBarra(posicionAMover)
+		return elementoSolido.todosLosElementosSolidos().any({elemento => elemento.position() == posicionAMover}) || self.hayBorde(posicionAMover) || barra.hayBarra(posicionAMover) || stats.hayCuadroStats(posicionAMover)
 		// Este método devuelve si algún elemento sólido de la escena es IGUAL a la posición dada
 		// Lo utilizamos para sensar el movimiento del mozo
 		// si la posición a la que SE MOVERÁ el mozo es LA MISMA que la de algún elemento sólido de la escena

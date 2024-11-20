@@ -35,8 +35,6 @@ object nivel1 {
         mozo.actualizarCondicionPerdida(3)
 
         temporizador.correrTiempo() // Se inicializa el temporizador de la partida
-
-        quieroCafe.play()
     }
 }
 

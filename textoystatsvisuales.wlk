@@ -12,7 +12,7 @@ class TextoVisual {
 object visuales {
     
     const property todosLosStats = [stats, textoClientesAtendidos, textoClientesPerdidos, textoTeclaW, textoTeclaA, textoTeclaD]
-    
+
     const property textoTeclaW = new TextoVisual(position = game.at(5,0), text="Atender pedido: W", textColor=paleta.blanco())
     const property textoTeclaA = new TextoVisual(position = game.at(8,0), text="Tomar café de la Barra: A", textColor=paleta.blanco())
     const property textoTeclaD = new TextoVisual(position = game.at(11,0), text="Entregar café: D", textColor=paleta.blanco())
@@ -35,9 +35,12 @@ object textoClientesPerdidos {
 }
 
 object stats {
-
+    const property listaPos = [game.at(14, 10), game.at(15, 9), game.at(16, 9), game.at(15, 10), game.at(16,10), game.at(14,9)]
     method position() = game.at(14,9)
-    method image() = "cuadradoStats.png"
+    method image() = "cuadroTexto.png"
+    method hayCuadroStats(unaPos) {
+        return listaPos.any({p => p == unaPos})
+    } 
 }
 
 object paleta {
@@ -45,10 +48,7 @@ object paleta {
 }
 
 /*object textoFantasmasVisibles {
-
     // se utilizó para identificar bugs
-    
     method position() = game.at(7,9)
     method text() = "lista de visibles = " + cliente.fantasmasVisibles().toString()
-
 }*/
