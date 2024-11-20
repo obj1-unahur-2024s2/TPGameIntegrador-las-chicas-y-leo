@@ -29,9 +29,6 @@ object config {
 
 		keyboard.d().onPressDo({self.interaccionServirPedidoAFantasma()}) // Sirve el pedido en mano al cliente en la celda lindante
 
-		// TECLAS DE SONIDO
-
-		keyboard.q().onPressDo({quieroCafe.iniciarAudio()})
     }
 
 	// MÉTODOS DE INTERACCIÓN
