@@ -64,6 +64,7 @@ object config {
 	}
 
 	// COLISIONES
+
 	method hayBorde(posicionAMover) {
 		// DETECTAR SI HAY BORDE
 		// Este método devuelve si la posición dada contiene alguno de los ejes donde se encuentra el borde de la escena
