@@ -140,7 +140,7 @@ object controles {
 
 // VISUAL DE CONTROLES
 object pantallaControles {
-    const property image = "menuTeclado.png"
+    const property image = "menuControles.png"
     const property position = game.at(0, 0) 
 }
 
