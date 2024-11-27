@@ -47,7 +47,7 @@ El videojuego consta de DOS niveles. El nivel 1, con una dificultad normal. El n
 ## GDD
 
 A la hora de planificar nuestro videojuego, decidimos abordar un GDD (Game design document) para facilitar el proceso del desarrollo.
-link
+[link](https://docs.google.com/document/d/1wFuGOHV540V-2ueIMUck-bVzmeOfcfZewx2BioOvNFg/edit?tab=t.0)
 
 ## Especificaciones
 
