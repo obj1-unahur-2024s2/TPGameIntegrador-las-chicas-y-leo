@@ -37,6 +37,8 @@ object mozo {
 
 		clienteAtendido = 0
 		clientesPerdidos = 0
+		tieneCafeEnMano = false
+		image = "fantasmaFrenteSinCafe.png"
 		position = game.at(1,1)
 
 	}
