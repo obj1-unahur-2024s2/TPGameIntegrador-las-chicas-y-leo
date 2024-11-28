@@ -13,9 +13,9 @@ object visuales {
     
     const property todosLosStats = [stats, textoClientesAtendidos, textoClientesPerdidos, textoTeclaW, textoTeclaA, textoTeclaD]
 
-    const property textoTeclaW = new TextoVisual(position = game.at(5,0), text="Atender pedido: W", textColor=paleta.blanco())
+    const property textoTeclaW = new TextoVisual(position = game.at(4,0), text="Atender pedido: W", textColor=paleta.blanco())
     const property textoTeclaA = new TextoVisual(position = game.at(8,0), text="Tomar café de la Barra: A", textColor=paleta.blanco())
-    const property textoTeclaD = new TextoVisual(position = game.at(11,0), text="Entregar café: D", textColor=paleta.blanco())
+    const property textoTeclaD = new TextoVisual(position = game.at(12,0), text="Entregar café: D", textColor=paleta.blanco())
     const property textoNivel1 = new TextoVisual(position = game.at(15,11), text="Nivel 1", textColor=paleta.blanco())
     const property textoNivel2 = new TextoVisual(position = game.at(15,11), text="Nivel 2", textColor=paleta.blanco())
 }

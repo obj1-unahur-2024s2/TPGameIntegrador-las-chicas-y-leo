@@ -53,11 +53,17 @@ object barra {
     }
 }
 
+class Antorcha inherits ElementoSolido {
+
+     method image() = "laAntorcha.gif"
+
+}
+
 object elementoSolido {
     // CREACIÓN DE LOS OBJETOS A UTILIZAR
 
     const property todosLosElementosSolidos = [sillaDer1, sillaIzq1, mesaIzq1, mesaDer1, sillaDer2, sillaIzq2, mesaIzq2, mesaDer2, sillaDer3, sillaIzq3, mesaIzq3,mesaDer3,
-                                    sillaDer4, sillaIzq4, mesaDer4, mesaIzq4, sillaDer5, sillaIzq5, mesaIzq5, mesaDer5, barra]
+                                    sillaDer4, sillaIzq4, mesaDer4, mesaIzq4, sillaDer5, sillaIzq5, mesaIzq5, mesaDer5, barra, antorcha1, antorcha2, antorcha3, antorcha4]
     // esta lista contendrá TODOS los objetos que añadiremos VISUALMENTE a la escena
 
     // lista posiciones sillas
@@ -96,4 +102,9 @@ object elementoSolido {
     const sillaIzq5 = new SillaDer(position = game.at(14,7))
     const mesaIzq5 = new MesaIzq(position = game.at(12,7))
     const mesaDer5 = new MesaDer(position = game.at(13,7))
+
+    const antorcha1 = new Antorcha(position = game.at(0,3))
+    const antorcha2 = new Antorcha(position = game.at(0,7))
+    const antorcha3 = new Antorcha(position = game.at(17,3))
+    const antorcha4 = new Antorcha(position = game.at(17,7))
 }
