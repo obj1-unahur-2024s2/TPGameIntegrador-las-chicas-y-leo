@@ -4,14 +4,11 @@ import clientes.*
 // este script contiene TODOS los elementos visuales que aparecerán en nuestro videojuego
 
 // DEFINICION DE CLASES PARA LOS OBJETOS A UTILIZAR
-class ElementoSolido {
-    // creamos una clase elemento solido que nos permita definir objetos
-    // a los cuales no se los pueda "atravesar"
+
+class SillaIzq {
 
     const property position
-}
 
-class SillaIzq inherits ElementoSolido {
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})
     }
@@ -20,7 +17,10 @@ class SillaIzq inherits ElementoSolido {
 
     method image() = "restauranteSillaIzquierda.png"
 }
-class SillaDer inherits ElementoSolido {
+class SillaDer {
+
+    const property position
+    
     method estaOcupada() {
         return cliente.fantasmasVisibles().any({f => f.position() == self.position()})
     }
@@ -29,11 +29,13 @@ class SillaDer inherits ElementoSolido {
 
     method image() = "restauranteSillaDerecha.png"
 }
-class MesaIzq inherits ElementoSolido { 
+class MesaIzq { 
+    const property position
     method image() = "restauranteMesaIzq.png"
 }
 
-class MesaDer inherits ElementoSolido {
+class MesaDer {
+    const property position
     method image() = "restauranteMesaDer.png"
 }
 
@@ -53,7 +55,9 @@ object barra {
     }
 }
 
-class Antorcha inherits ElementoSolido {
+class Antorcha {
+
+    const property position
 
      method image() = "laAntorcha.gif"
 

@@ -117,7 +117,7 @@ object menu {
 
 // VISUAL DEL MENÚ PRINCIPAL
 object pantallaMenu {
-    const property image = "finalMenu.png"
+    const property image = "menuAnimadoGC.gif"
     const property position = game.at(0, 0) 
 }
 
